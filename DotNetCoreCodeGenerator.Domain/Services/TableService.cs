@@ -41,7 +41,7 @@ namespace DotNetCodeGenerator.Domain.Services
 
 
             var items = cache.Get<DatabaseMetadata>("DatabaseMetadata");
-            if (items == null)
+            //if (items == null && items.Tables!=null)
             {
                 items = GetAllTables(connectionString);
                 cache.Set("DatabaseMetadata",items,options);

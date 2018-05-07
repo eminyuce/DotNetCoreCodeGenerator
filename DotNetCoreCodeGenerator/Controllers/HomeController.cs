@@ -14,9 +14,9 @@ namespace DotNetCoreCodeGenerator.Controllers
 {
     public class HomeController : BaseController
     {
-        public TableService TableService { get; set; }
+        public ITableService TableService { get; set; }
 
-        public HomeController(TableService _tableService)
+        public HomeController(ITableService _tableService)
         {
             TableService = _tableService;
         }

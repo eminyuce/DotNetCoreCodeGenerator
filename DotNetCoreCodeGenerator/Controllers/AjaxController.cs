@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DotNetCodeGenerator.Domain.Services;
+using DotNetCoreCodeGenerator.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,18 +12,23 @@ namespace DotNetCoreCodeGenerator.Controllers
     public class AjaxController : BaseController
     {
         private readonly ILogger _logger;
-        private TableService TableService { get; set; }
+        private ITableService TableService { get; set; }
 
-        public AjaxController(TableService _tableService, ILogger<AjaxController> logger)
+        public AjaxController(ITableService _tableService, ILogger<AjaxController> logger)
         {
             _logger = logger;
             TableService = _tableService;
         }
-       // public async Task<IActionResult> GetTables(String connectionString = "", string mySqlConnectionString = "")
+        // public async Task<IActionResult> GetTables(String connectionString = "", string mySqlConnectionString = "")
 
 
-        public IActionResult GetTables(String connectionString = "", string mySqlConnectionString = "")
+        [HttpPost]
+        //  public IActionResult GetTables([FromBody]string connectionString = "", [FromBody]string mySqlConnectionString = "")
+        public IActionResult GetTables([FromBody]AjaxConnectionString ajaxConnectionString = null)
+
         {
+            string connectionString = ajaxConnectionString.ConnectionString;
+            string mySqlConnectionString = ajaxConnectionString.MySqlConnectionString;
             if (String.IsNullOrEmpty(connectionString) && String.IsNullOrEmpty(mySqlConnectionString))
             {
                 //   return Json("", JsonRequestBehavior.AllowGet);
@@ -57,8 +63,8 @@ namespace DotNetCoreCodeGenerator.Controllers
                 return Ok(resultHtml);
             }
 
-           // return Json("", JsonRequestBehavior.AllowGet);
-                   return Ok("");
+            // return Json("", JsonRequestBehavior.AllowGet);
+            return Ok("");
         }
     }
 }

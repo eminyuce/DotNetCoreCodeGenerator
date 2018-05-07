@@ -19,10 +19,7 @@ namespace DotNetCoreCodeGenerator
 
         //}
 
-        //public static IWebHost BuildWebHost(string[] args) =>
-        //    WebHost.CreateDefaultBuilder(args)
-        //        .UseStartup<Startup>()
-        //        .Build();
+ 
 
 
         public static void Main(string[] args)
@@ -35,10 +32,16 @@ namespace DotNetCoreCodeGenerator
             BuildWebHost(args).Run();
         }
 
+        //public static IWebHost BuildWebHost(string[] args) =>
+        //    WebHost.CreateDefaultBuilder(args)
+        //     .UseContentRoot(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "/publish")
+        //        .UseStartup<Startup>()
+        //        .Build();
+
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-             .UseContentRoot(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "/publish")
-                .UseStartup<Startup>()
-                .Build();
+     WebHost.CreateDefaultBuilder(args)
+         .UseStartup<Startup>()
+         .Build();
+
     }
 }
