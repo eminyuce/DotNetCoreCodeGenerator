@@ -1,0 +1,22 @@
+﻿using DotNetCodeGenerator.Domain.Entities;
+
+namespace DotNetCodeGenerator.Domain.Helpers
+{
+    public interface ICodeProducerHelper
+    {
+
+        CodeGeneratorResult CodeGeneratorResult { get; set; }
+        DatabaseMetadata DatabaseMetadata { get; set; }
+
+        void GenerateAspMvcControllerClass();
+        void GenerateMySqlSaveOrUpdateStoredProcedure();
+        string GenerateNewInstance();
+        void GenerateSaveOrUpdateStoredProcedure();
+        void GenerateSqlRepository();
+        void GenerateStoredProcExecutionCode();
+        void GenerateTableItem();
+        void GenerateTableServices();
+        void GenerateWebApiController();
+        void GenereateMySqlRepository();
+    }
+}

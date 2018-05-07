@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetCoreCodeGenerator.Data;
 using DotNetCoreCodeGenerator.Models;
 using DotNetCoreCodeGenerator.Services;
+using Microsoft.Extensions.Caching.Memory;
+using DotNetCodeGenerator.Domain.Services;
+using DotNetCodeGenerator.Domain.Repositories;
+using DotNetCodeGenerator.Domain.Helpers;
 
 namespace DotNetCoreCodeGenerator
 {
@@ -22,7 +26,7 @@ namespace DotNetCoreCodeGenerator
         }
 
         public IConfiguration Configuration { get; }
-
+        public static IMemoryCache _memoryCache;
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -33,10 +37,21 @@ namespace DotNetCoreCodeGenerator
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddTransient<ITableRepository, TableRepository>();
+            services.AddTransient<ITableService, TableService>();
+            services.AddTransient<ICodeProducerHelper, CodeProducerHelper>();
+            services.AddTransient<ISqlParserHelper, SqlParserHelper>();
+            // Add application services.
+            // services.AddTransient<IEmailSender, EmailSender>();
+            // Add Caching Support
+            services.AddMemoryCache();
             services.AddMvc();
+         
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,3 +81,4 @@ namespace DotNetCoreCodeGenerator
         }
     }
 }
+
