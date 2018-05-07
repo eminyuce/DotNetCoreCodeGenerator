@@ -8,9 +8,16 @@
 
 <h4>Code Generator Result</h4>
 <hr />
+
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Index">
+
+            <select asp-for="SelectedTable">
+                <option>Please select</option>
+            </select>
+
             <input type="hidden" value="@Model.SelectedTable.ToStr()" id="SelectedTableValue" />
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -39,9 +46,6 @@
                 <label asp-for="SelectedTable" class="control-label"></label>
                 <div class="col-md-4">
 
-                    <select asp-for="SelectedTable">
-                        <option>Please select</option>
-                    </select>
                 </div>
                 <div class="col-md-3">
                     <input type="button" id="RetrieveTables" value="Get Tables" />
@@ -161,7 +165,7 @@
         </form>
     </div>
 </div>
-<input  id="TableCopied" type="text" />
+<input id="TableCopied" type="text" />
 
 <div>
     <a asp-action="Index">Back to List</a>
