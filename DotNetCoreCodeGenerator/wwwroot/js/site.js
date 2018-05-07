@@ -76,18 +76,18 @@ $(document).ready(function () {
             var postData = JSON.stringify({ "connectionString": $("#ConnectionString").val(), "MySqlConnectionString": $("#MySqlConnectionString").val() });
             ajaxMethodCall(postData, "/Ajax/GetTables", function (data) {
                 var listitems = '';
-                $('#SelectedTable').find('option').remove();
                 var SelectedTableValue = $("#SelectedTableValue").val();
-                $.each(data, function (i, item) {
-                    console.log(item.DatabaseTableName);
-                    if (!isEmpty(item.DatabaseTableName)) {
-                        var isSelected = SelectedTableValue === item.DatabaseTableName ? "selected='true'" : "";
-                        listitems += '<option ' + isSelected + ' value=\'' + item.DatabaseTableName + '\'>'
-                            + item.TableNameWithSchema + '</option>';
-                    }
+                $("#SelectedTable").empty();
+                data.forEach(function (element) {
+                    console.log(element.TableNameWithSchema);
+
+                    $("#SelectedTable").append("<option value=" + element.DatabaseTableName+">" + element.TableNameWithSchema + "</option>");
+
                 });
-                $('#TableCopied').val(listitems);
-                $('#SelectedTable').append(listitems);
+                $("#SelectedTable option").each(function () {
+                    console.log('OPTION:'+$(this).text());
+                });
+
             });
         }
     }
