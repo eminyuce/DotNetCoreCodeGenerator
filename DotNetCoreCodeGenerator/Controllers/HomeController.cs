@@ -23,6 +23,7 @@ namespace DotNetCoreCodeGenerator.Controllers
         public IActionResult Index()
         {
             var codeGeneratorResult = new CodeGeneratorResult();
+            codeGeneratorResult.ConnectionString = @"Server=YUCE\SQLEXPRESS;Database=TestEY;Trusted_Connection=True;MultipleActiveResultSets=true";
             codeGeneratorResult.DatabaseMetadata = null;
             codeGeneratorResult.UserMessage = "Hi, dude, Generate the code of selected table \"Controller, Service, Repository and the SQL\" :)";
             codeGeneratorResult.UserMessageState = UserMessageState.Welcome;

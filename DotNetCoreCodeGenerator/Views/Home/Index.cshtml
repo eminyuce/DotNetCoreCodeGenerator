@@ -36,8 +36,7 @@
             <div class="form-group">
                 <label asp-for="SelectedTable" class="control-label"></label>
                 <div class="col-md-4">
-                    <select asp-for="SelectedTable" class="form-control" />
-                    <span asp-validation-for="SelectedTable" class="text-danger"></span>
+                    <select id="SelectedTable" class="form-control"></select>
                 </div>
                 <div class="col-md-3">
                     <input type="button" id="RetrieveTables" value="Get Tables" />
@@ -157,6 +156,7 @@
         </form>
     </div>
 </div>
+<input id="TableCopied" type="hidden" />
 
 <div>
     <a asp-action="Index">Back to List</a>

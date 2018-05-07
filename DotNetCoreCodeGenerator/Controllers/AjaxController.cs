@@ -6,6 +6,7 @@ using DotNetCodeGenerator.Domain.Services;
 using DotNetCoreCodeGenerator.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {
@@ -34,6 +35,7 @@ namespace DotNetCoreCodeGenerator.Controllers
                 //   return Json("", JsonRequestBehavior.AllowGet);
                 return Ok("");
             }
+            string jsonData = "";
             if (!String.IsNullOrEmpty(connectionString))
             {
                 var allTablesMetaData = TableService.GetAllTablesFromCache(connectionString);
@@ -46,7 +48,9 @@ namespace DotNetCoreCodeGenerator.Controllers
 
                 resultHtml.Insert(0, new { TableNameWithSchema = "Select a Table from SqlServer", DatabaseTableName = "" });
                 //return Json(resultHtml, JsonRequestBehavior.AllowGet);
-                return Ok(resultHtml);
+                // return Ok(resultHtml);
+                 jsonData = JsonConvert.SerializeObject(resultHtml);
+       
             }
             else if (!String.IsNullOrEmpty(mySqlConnectionString))
             {
@@ -59,12 +63,12 @@ namespace DotNetCoreCodeGenerator.Controllers
                                   }).ToList();
 
                 resultHtml.Insert(0, new { TableNameWithSchema = "Select a Table From MySql", DatabaseTableName = "" });
-                // return Json(resultHtml, JsonRequestBehavior.AllowGet);
-                return Ok(resultHtml);
+                jsonData = JsonConvert.SerializeObject(resultHtml);
+       
             }
 
             // return Json("", JsonRequestBehavior.AllowGet);
-            return Ok("");
+            return Content(jsonData, "application/json");
         }
     }
 }

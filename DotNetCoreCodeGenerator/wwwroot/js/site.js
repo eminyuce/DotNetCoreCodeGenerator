@@ -79,10 +79,12 @@ $(document).ready(function () {
                 $('#SelectedTable').find('option').remove();
                 var SelectedTableValue = $("#SelectedTableValue").val();
                 $.each(data, function (i, item) {
-
-                    var isSelected = SelectedTableValue === item.DatabaseTableName ? "selected='true'" : "";
-                    listitems += '<option ' + isSelected + ' value=' + item.DatabaseTableName + '>'
-                        + item.TableNameWithSchema + '</option>';
+                    console.log(item.DatabaseTableName);
+                    if (!isEmpty(item.DatabaseTableName)) {
+                        var isSelected = SelectedTableValue === item.DatabaseTableName ? "selected='true'" : "";
+                        listitems += '<option ' + isSelected + ' value=\'' + item.DatabaseTableName + '\'>'
+                            + item.TableNameWithSchema + '</option>';
+                    }
                 });
                 $('#TableCopied').val(listitems);
                 $('#SelectedTable').append(listitems);
