@@ -6,6 +6,9 @@ The following command grants the specified user or group accounts access to the 
 aspnet_regiis -ga MyUserGroup W3SVC/1/ROOT/SampleApp1
 
 aspnet_regiis -ga [MACHINE_NAME]\[SQL_USER_NAME]
+
+EX: SqlUser is the defined user in the Sql Database with password SqlUser123, yuce is the machine name
+
 aspnet_regiis -ga yuce\SqlUser
 
 C:\Windows\Microsoft.NET\Framework\v2.0.50727>aspnet_regiis -ga yuce\SqlUser
@@ -14,4 +17,6 @@ Finished granting yuce\SqlUser access to the IIS metabase and other directories 
 
  
 
-MAKE THAT WEB APP RUNNING UNDER ACCOUNT  SqlUser So that web app can have access database server.
+MAKE THAT WEB APP RUNNING UNDER ACCOUNT  [SQL_USER_NAME] (SqlUser) So that web app can have access database server.
+APPLICATION POOL --> Select right app pool whom the web app is running on the top of it. --> 
+Advanced Settings --> Under [Process Model] for [Identity], it should be [SQL_USER_NAME], in that case SqlUser
