@@ -15,6 +15,9 @@ using Microsoft.Extensions.Caching.Memory;
 using DotNetCodeGenerator.Domain.Services;
 using DotNetCodeGenerator.Domain.Repositories;
 using DotNetCodeGenerator.Domain.Helpers;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace DotNetCoreCodeGenerator
 {
@@ -55,8 +58,12 @@ namespace DotNetCoreCodeGenerator
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddNLog();
+            env.ConfigureNLog("nlog.config");
+
+
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();

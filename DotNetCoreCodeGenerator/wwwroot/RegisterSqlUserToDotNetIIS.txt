@@ -1,0 +1,17 @@
+﻿
+REGISTER SQL USER TO DOT NET FRAMEWORK SO THAT IIS Server will be accessing sql database.
+
+The following command grants the specified user or group accounts access to the IIS metabase and the other directories used by ASP.NET.
+
+aspnet_regiis -ga MyUserGroup W3SVC/1/ROOT/SampleApp1
+
+aspnet_regiis -ga [MACHINE_NAME]\[SQL_USER_NAME]
+aspnet_regiis -ga yuce\SqlUser
+
+C:\Windows\Microsoft.NET\Framework\v2.0.50727>aspnet_regiis -ga yuce\SqlUser
+Start granting yuce\SqlUser access to the IIS metabase and other directories used by ASP.NET.
+Finished granting yuce\SqlUser access to the IIS metabase and other directories used by ASP.NET.
+
+ 
+
+MAKE THAT WEB APP RUNNING UNDER ACCOUNT  SqlUser So that web app can have access database server.

@@ -9,19 +9,23 @@ using DotNetCodeGenerator.Domain.Entities;
 using DotNetCodeGenerator.Domain.Entities.Enums;
 using DotNetCodeGenerator.Domain.Helpers;
 using DotNetCodeGenerator.Domain.Services;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {
     public class HomeController : BaseController
     {
-        public ITableService TableService { get; set; }
+        private ITableService TableService { get; set; }
+        private ILogger<HomeController> Logger { get; set; }
 
-        public HomeController(ITableService _tableService)
+        public HomeController(ITableService _tableService, ILogger<HomeController> _logger)
         {
             TableService = _tableService;
+            Logger = _logger;
         }
         public IActionResult Index()
         {
+            Logger.LogInformation("HomeController Index page");
             var codeGeneratorResult = new CodeGeneratorResult();
             codeGeneratorResult.ConnectionString = @"Server=YUCE\SQLEXPRESS;Database=TestEY;Trusted_Connection=True;MultipleActiveResultSets=true";
             codeGeneratorResult.DatabaseMetadata = null;
