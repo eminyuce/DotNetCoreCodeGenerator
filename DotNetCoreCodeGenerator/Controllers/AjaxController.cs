@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetCodeGenerator.Domain.Helpers;
 using DotNetCodeGenerator.Domain.Services;
 using DotNetCoreCodeGenerator.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +29,8 @@ namespace DotNetCoreCodeGenerator.Controllers
         public IActionResult GetTables([FromBody]AjaxConnectionString ajaxConnectionString = null)
 
         {
-            string connectionString = ajaxConnectionString.ConnectionString;
-            string mySqlConnectionString = ajaxConnectionString.MySqlConnectionString;
+            string connectionString = ajaxConnectionString.ConnectionString.ToStr().Trim();
+            string mySqlConnectionString = ajaxConnectionString.MySqlConnectionString.ToStr().Trim();
             if (String.IsNullOrEmpty(connectionString) && String.IsNullOrEmpty(mySqlConnectionString))
             {
                 //   return Json("", JsonRequestBehavior.AllowGet);

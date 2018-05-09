@@ -1,0 +1,215 @@
+    1  sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+    2  sudo apt-get update
+    3  sudo apt-get install dotnet-sdk-2.1.104
+    4  sudo apt-get install dotnet-sdk-2.1.4
+    5  sudo apt-get install dotnet-sdk-2.1
+    6  sudo apt-get install dotnet-sdk-2.1.101
+    7  sudo apt-get install dotnet-sdk-2.1.14
+    8  sudo apt-get install dotnet-sdk-2.1.104
+    9  sudo apt-get update
+   10  dotnet --version
+   11  sudo apt-get install dotnet-sdk-2.1.4
+   12  curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+   13  sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+   14  sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list'
+   15  sudo apt-get install apt-transport-https
+   16  sudo apt-get update
+   17  sudo apt-get install dotnet-sdk-2.1.4
+   18  sudo apt-get install nginx
+   19  sudo service nginx start
+   20  sudo nano /etc/nginx/sites-available/default
+   21  sudo nginx -s reload
+   22  adduser eminweb
+   23  whoiam
+   24  whoami
+   25  ls
+   26  cd myApp
+   27  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+   28  dotnet
+   29  sudo apt-get install dotnet-sdk-2.0.2
+   30  dotnet
+   31  dotnet --help
+   32  cd..
+   33  cd ..
+   34  mkdir testapp
+   35  cd testapp/
+   36  dotnet new
+   37  sudo apt-get install dotnet-sdk-2.0.2
+   38  sudo apt-get install apt-transport-https
+   39  sudo apt-get update
+   40  sudo apt-get install dotnet-sdk-2.1.105
+   41  sudo apt-get install dotnet-runtime-2.1.105
+   42  sudo apt-get install dotnet-runtime-2.0.3
+   43  sudo apt-get install libicu57
+   44  clear
+   45  sudo apt-get install libicu57
+   46  apt-get install libunwind8
+   47  sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+   48  sudo apt-get install apt-transport-https
+   49  sudo apt-get update
+   50  sudo apt-get install dotnet-sdk-2.1.4
+   51  dotnet
+   52  sudo apt-get install dotnet-sdk-2.1.4
+   53  dotnet
+   54  cd..
+   55  cd ..
+   56  ls
+   57  cd myApp/
+   58  ls
+   59  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+   60  ls
+   61  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+   62  cd bin
+   63  ls
+   64  cd TestDeployment3/
+   65  ls
+   66  cd bin
+   67  cd Release/
+   68  cd netcoreapp2.0/
+   69  ls
+   70  dotnet TestDeployment3.dll
+   71  cd ..
+   72  ls
+   73  cd ..
+   74  ls
+   75  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+   76  cd bin
+   77  cd TestDeployment3/
+   78  cd bin
+   79  cd Re
+   80  ls
+   81  cd Release/
+   82  ls
+   83  cd netcoreapp2.0/
+   84  ls
+   85  cd ubuntu.16.04-x64/
+   86  ls
+   87  dotnet TestDeployment3.dll
+   88  sudo service nginx startsudo service nginx start
+   89  sudo service nginx start
+   90  sudo nano /etc/nginx/sites-available/defaultsudo nano /etc/nginx/sites-available/default
+   91  sudo nano /etc/nginx/sites-available/default
+   92  dotnet TestDeployment3.dll
+   93  sudo nano /etc/nginx/sites-available/default
+   94  sudo nginx -s reload
+   95  dotnet TestDeployment3.dll
+   96  pwd
+   97  cd ..
+   98  ls
+   99  cd ubuntu.16.04-x64/
+  100  export PATH=$PATH:/myApp/TestDeployment3/bin/Release/netcoreapp2.0/ubuntu.16.04-x64
+  101  echo $PATH
+  102  dotnet TestDeployment3.dll
+  103  cd ..
+  104  history >> file.txt
+  105  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+  106  cd bin
+  107  cd TestDeployment3/bin/Release/netcoreapp2.0/ubuntu.16.04-x64/
+  108  dotnet TestDeployment3.dll
+  109  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0
+  110  ls
+  111  dotnet TestDeployment3.dll
+  112  history
+  113  cd ..
+  114  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+  115  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0
+  116  dotnet TestDeployment3.dll
+  117  cd ubuntu.16.04-x64/
+  118  dotnet TestDeployment3.dll
+  119  cd ..
+  120  rm bin
+  121  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+  122  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0
+  123  cd ubuntu.16.04-x64/
+  124  ls
+  125  dotnet TestDeployment3.dll
+  126  cd ..
+  127  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+  128  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0/ubuntu.16.04-x64/publish
+  129  ls
+  130  cd ..
+  131  dotnet TestDeployment3.dll
+  132  cd..
+  133  cd ..
+  134  dotnet publish -c Release  --self-contained
+  135  dotnet publish
+  136  dotnet publish -c Release
+  137  ls
+  138  cd bin/Release/
+  139  ls
+  140  cd netcoreapp2.0/
+  141  ls
+  142  dotnet TestDeployment3.dll
+  143  cd ..
+  144  dotnet publish -c Release
+  145  cd /home/yuce/myApp/TestDeployment3/bin/Release/
+  146  ls
+  147  cd netcoreapp2.0/
+  148  ls
+  149  dotnet TestDeployment3.dll
+  150  cd ..
+  151  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0/ubuntu.16.04-x64/publish
+  152  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+  153  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0
+  154  dotnet TestDeployment3.dll
+  155  cd ..
+  156  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+  157  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0/ubuntu.16.04-x64
+  158  dotnet publish TestDeployment3.dll
+  159  cd ..
+  160  dotnet publish -c Release
+  161  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0
+  162  dotnet publish TestDeployment3.dll
+  163  cd ..
+  164  dotnet publish -c Release 
+  165  cd elease/netcoreapp2.0/publish/
+  166  cd 
+  167  cd /home/yuce/myApp/TestDeployment3/bin/Release/netcoreapp2.0
+  168  dotnet TestDeployment3.dll
+  169  ls
+  170  cd codeGenerator/
+  171  ls
+  172  dotnet run DotNetCoreCodeGenerator.dll
+  173  history
+  174  dotnet DotNetCoreCodeGenerator.dll
+  175  history
+  176  ls
+  177  dotnet publish -c Release 
+  178  clear
+  179  dotnet publish -c Release 
+  180  ls
+  181  cd DotNetCoreCodeGenerator
+  182  cd bin
+  183  ls
+  184  cd Release/
+  185  ls
+  186  cd netcoreapp2.0/
+  187  ls
+  188  dotnet DotNetCoreCodeGenerator.dll
+  189  cd..
+  190  cd ..
+  191  ls
+  192  dotnet -c Release 
+  193  dotnet publish --configuration Release --output bin/output/
+  194  cd /home/yuce/codeGenerator/DotNetCoreCodeGenerator/bin/Release/netcoreapp2.0
+  195  dotnet DotNetCoreCodeGenerator.dll
+  196  ls
+  197  cd ..
+  198  ls
+  199  dotnet publish --configuration Release --output ./approot
+  200  cd /home/yuce/codeGenerator/DotNetCoreCodeGenerator/bin/Release/netcoreapp2.0
+  201  dotnet DotNetCoreCodeGenerator.dll
+  202  cd ..
+  203  dotnet publish --configuration Release
+  204  dotnet publish --configuration Release --output ./approot
+  205  cd /home/yuce/codeGenerator/DotNetCoreCodeGenerator/bin/Release/netcoreapp2.0
+  206  dotnet DotNetCoreCodeGenerator.dll
+  207  cd ..
+  208  dotnet publish --configuration Release 
+  209  dotnet publish -c Release -r ubuntu.16.04-x64 --self-contained
+  210  dotnet publish -c Release
+  211  dotnet DotNetCoreCodeGenerator.dll
+  212  ls
+  213  cd DotNetCoreCodeGenerator/bin/in
+  214  dotnet DotNetCoreCodeGenerator/bin/Release/netcoreapp2.0/DotNetCoreCodeGenerator.dll
+  215  history >> history.txt

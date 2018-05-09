@@ -21,8 +21,10 @@
             <select asp-for="SelectedTable">
                 <option>Please select</option>
             </select>
-
-            <input type="hidden" value="@Model.SelectedTable.ToStr()" id="SelectedTableValue" />
+            <div class="form-group">
+                <input type="button" id="RetrieveTables" value="Get Tables" />
+                <input type="text" id="TextBox_Filter" placeholder="Filter Table Names" />
+            </div>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -37,26 +39,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="SqlCreateTableStatement" class="control-label"></label>
-                <textarea asp-for="SqlCreateTableStatement" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="SelectedTable" class="control-label"></label>
-                <input asp-for="SelectedTable" class="form-control" />
-                <span asp-validation-for="SelectedTable" class="text-danger"></span>
+                <textarea asp-for="SqlCreateTableStatement" class="form-control"></textarea>
             </div>
 
-            <div class="form-group">
-                <label asp-for="SelectedTable" class="control-label"></label>
-                <div class="col-md-4">
-
-                </div>
-                <div class="col-md-3">
-                    <input type="button" id="RetrieveTables" value="Get Tables" />
-                </div>
-                <div class="col-md-3">
-                    <input type="text" id="TextBox_Filter" placeholder="Filter Table Names" />
-                </div>
-            </div>
 
             <div class="form-group">
                 <label asp-for="ModifiedTableName" class="control-label"></label>

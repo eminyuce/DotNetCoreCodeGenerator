@@ -34,12 +34,12 @@ namespace DotNetCodeGenerator.Domain.Repositories
             //DataTable schema = conn.GetSchema("Columns", new string[4] { null, conn.Database, "products", null });
 
             //            Note that the first 2 items in the array are swapped. 
-
+            var selectedTableWithDatabase = selectedTable.Split("-".ToCharArray()).FirstOrDefault().ToStr();
             var con = new MySqlConnection(databaseMetaData.MySqlConnectionString);
             con.Open();
 
             string[] objArrRestrict;
-            var tParts = selectedTable.Split(".".ToCharArray());
+            var tParts = selectedTableWithDatabase.Split(".".ToCharArray());
             objArrRestrict = new string[] {null,
                 con.Database,
                 tParts[2],
@@ -49,7 +49,7 @@ namespace DotNetCodeGenerator.Domain.Repositories
 
 
             List<TableRowMetaData> TableRowMetaDataList = new List<TableRowMetaData>();
-            var selectedTableObj = databaseMetaData.Tables.FirstOrDefault(r => r.DatabaseTableName.Equals(selectedTable, StringComparison.InvariantCultureIgnoreCase));
+            var selectedTableObj = databaseMetaData.Tables.FirstOrDefault(r => r.DatabaseTableName.Equals(selectedTableWithDatabase, StringComparison.InvariantCultureIgnoreCase));
 
             if (selectedTableObj != null)
             {
