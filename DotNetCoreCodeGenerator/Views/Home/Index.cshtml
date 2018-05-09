@@ -11,7 +11,13 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Index">
-
+            <input type="hidden" value="@Model.SelectedTable.ToStr()" id="SelectedTableValue" />
+            <div class="bs-example">
+                <div class="alert alert-success fade in">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>@Model.UserMessageState.ToString()!</strong> @Model.UserMessage.ToStr()
+                </div>
+            </div>
             <select asp-for="SelectedTable">
                 <option>Please select</option>
             </select>
@@ -57,6 +63,10 @@
                 <label asp-for="ModifiedTableName" class="control-label"></label>
                 <input asp-for="ModifiedTableName" class="form-control" />
                 <span asp-validation-for="ModifiedTableName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="btnAction" value="Fill GridView" class="btn btn-default" />
+                <input type="submit" name="btnAction" value="Generate Code" class="btn btn-default" />
             </div>
             <div class="form-group">
                 <label asp-for="StringCodePattern" class="control-label"></label>
@@ -107,7 +117,7 @@
 
             </div>
             <div class="form-group">
-           
+
                 @await Html.PartialAsync("_ResultCodePartial",
           new ViewDataDictionary(this.ViewData) {
               { "Name", "TableRepository" },
@@ -123,54 +133,65 @@
                    { "ResultLanguage", "csharp" } })
             </div>
             <div class="form-group">
-                <label asp-for="TableClassInstance" class="control-label"></label>
-                <input asp-for="TableClassInstance" class="form-control" />
-                <span asp-validation-for="TableClassInstance" class="text-danger"></span>
+
+                @await Html.PartialAsync("_ResultCodePartial",
+new ViewDataDictionary(this.ViewData) {
+{ "Name", "TableClassInstance" },
+{ "Value", Model.TableClassInstance },
+{ "ResultLanguage", "csharp" } })
+
             </div>
             <div class="form-group">
-                <label asp-for="SqlDatabaseOperation" class="control-label"></label>
-                <input asp-for="SqlDatabaseOperation" class="form-control" />
-                <span asp-validation-for="SqlDatabaseOperation" class="text-danger"></span>
+
+                @await Html.PartialAsync("_ResultCodePartial",
+new ViewDataDictionary(this.ViewData) {
+{ "Name", "SqlDatabaseOperation" },
+{ "Value", Model.SqlDatabaseOperation },
+{ "ResultLanguage", "csharp" } })
+
             </div>
             <div class="form-group">
-                <label asp-for="AspMvcControllerClass" class="control-label"></label>
-                <input asp-for="AspMvcControllerClass" class="form-control" />
-                <span asp-validation-for="AspMvcControllerClass" class="text-danger"></span>
+
+                @await Html.PartialAsync("_ResultCodePartial",
+new ViewDataDictionary(this.ViewData) {
+{ "Name", "AspMvcControllerClass" },
+{ "Value", Model.AspMvcControllerClass },
+{ "ResultLanguage", "csharp" } })
+
             </div>
             <div class="form-group">
-                <label asp-for="SqlSaveOrUpdateStoredProc" class="control-label"></label>
-                <input asp-for="SqlSaveOrUpdateStoredProc" class="form-control" />
-                <span asp-validation-for="SqlSaveOrUpdateStoredProc" class="text-danger"></span>
+
+                @await Html.PartialAsync("_ResultCodePartial",
+new ViewDataDictionary(this.ViewData) {
+{ "Name", "SqlSaveOrUpdateStoredProc" },
+{ "Value", Model.SqlSaveOrUpdateStoredProc },
+{ "ResultLanguage", "csharp" } })
+
+            </div>
+
+            <div class="form-group">
+                @await Html.PartialAsync("_ResultCodePartial",
+new ViewDataDictionary(this.ViewData) {
+{ "Name", "MySqlDatabaseOperation" },
+{ "Value", Model.MySqlDatabaseOperation },
+{ "ResultLanguage", "csharp" } })
             </div>
             <div class="form-group">
-                <label asp-for="UserMessage" class="control-label"></label>
-                <input asp-for="UserMessage" class="form-control" />
-                <span asp-validation-for="UserMessage" class="text-danger"></span>
+                @await Html.PartialAsync("_ResultCodePartial",
+new ViewDataDictionary(this.ViewData) {
+{ "Name", "MySqlSaveOrUpdateStoredProc" },
+{ "Value", Model.MySqlSaveOrUpdateStoredProc },
+{ "ResultLanguage", "sql" } })
+
             </div>
             <div class="form-group">
-                <label asp-for="UserMessageState" class="control-label"></label>
-                <input asp-for="UserMessageState" class="form-control" />
-                <span asp-validation-for="UserMessageState" class="text-danger"></span>
+                @await Html.PartialAsync("_ResultCodePartial",
+new ViewDataDictionary(this.ViewData) {
+{ "Name", "WebApiController" },
+{ "Value", Model.WebApiController },
+{ "ResultLanguage", "csharp" } })
             </div>
-            <div class="form-group">
-                <label asp-for="MySqlDatabaseOperation" class="control-label"></label>
-                <input asp-for="MySqlDatabaseOperation" class="form-control" />
-                <span asp-validation-for="MySqlDatabaseOperation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MySqlSaveOrUpdateStoredProc" class="control-label"></label>
-                <input asp-for="MySqlSaveOrUpdateStoredProc" class="form-control" />
-                <span asp-validation-for="MySqlSaveOrUpdateStoredProc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WebApiController" class="control-label"></label>
-                <input asp-for="WebApiController" class="form-control" />
-                <span asp-validation-for="WebApiController" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" name="btnAction" value="Fill GridView" class="btn btn-default" />
-                <input type="submit" name="btnAction" value="Generate Code" class="btn btn-default" />
-            </div>
+
         </form>
     </div>
 </div>

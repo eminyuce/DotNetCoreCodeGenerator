@@ -84,13 +84,15 @@ $(document).ready(function () {
     }
     function fillOutOptions(data) {
         $("#SelectedTable").empty();
+        var SelectedTableValue = $("#SelectedTableValue").val();
         data.forEach(function (element) {
-            var p = "<option value=" + element.DatabaseTableName + ">" + element.TableNameWithSchema + "</option>";
+            var isSelected = SelectedTableValue == element.DatabaseTableName ? "selected='true'" : "";
+            var p = '<option ' + isSelected + ' value=' + element.DatabaseTableName + '>' + element.TableNameWithSchema + '</option>';
             $("#SelectedTable").append(p);
         });
     }
     $('#SelectedTable').on('change', function () {
-        $('#ModifiedTableName').val(this.value);
+        $('#ModifiedTableName').val(this.value.split("-")[1]);
     });
 
 });
