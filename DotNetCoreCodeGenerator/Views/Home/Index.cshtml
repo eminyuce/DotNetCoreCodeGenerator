@@ -4,11 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
 
-<h4>Code Generator Result</h4>
+<h2>Code Generator Result</h2>
 <hr />
-
 
 <div class="row">
     <div class="col-md-4">
@@ -100,19 +98,29 @@
                 <span asp-validation-for="StoredProcExecModel" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StoredProcExecModelDataReader" class="control-label"></label>
-                <input asp-for="StoredProcExecModelDataReader" class="form-control" />
-                <span asp-validation-for="StoredProcExecModelDataReader" class="text-danger"></span>
+
+                @await Html.PartialAsync("_ResultCodePartial",
+     new ViewDataDictionary(this.ViewData) {
+         { "Name", "StoredProcExecModelDataReader" },
+         { "Value", Model.StoredProcExecModelDataReader },
+         { "ResultLanguage", "csharp" } })
+
             </div>
             <div class="form-group">
-                <label asp-for="TableRepository" class="control-label"></label>
-                <input asp-for="TableRepository" class="form-control" />
-                <span asp-validation-for="TableRepository" class="text-danger"></span>
+           
+                @await Html.PartialAsync("_ResultCodePartial",
+          new ViewDataDictionary(this.ViewData) {
+              { "Name", "TableRepository" },
+              { "Value", Model.TableRepository },
+              { "ResultLanguage", "csharp" } })
+
             </div>
             <div class="form-group">
-                <label asp-for="TableClassItem" class="control-label"></label>
-                <input asp-for="TableClassItem" class="form-control" />
-                <span asp-validation-for="TableClassItem" class="text-danger"></span>
+                @await Html.PartialAsync("_ResultCodePartial",
+               new ViewDataDictionary(this.ViewData) {
+                   { "Name", "TableClassItem" },
+                   { "Value", Model.TableClassItem },
+                   { "ResultLanguage", "csharp" } })
             </div>
             <div class="form-group">
                 <label asp-for="TableClassInstance" class="control-label"></label>
@@ -160,12 +168,13 @@
                 <span asp-validation-for="WebApiController" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" name="btnAction" value="Fill GridView" class="btn btn-default" />
+                <input type="submit" name="btnAction" value="Generate Code" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
-<input id="TableCopied" type="text" />
+<input id="TableListCopied" type="hidden" />
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -174,3 +183,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+ 

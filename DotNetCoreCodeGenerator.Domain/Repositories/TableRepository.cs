@@ -221,13 +221,13 @@ namespace DotNetCodeGenerator.Domain.Repositories
 
             try
             {
-
+                var selectedTableWithDatabase = selectedTable.Split("-".ToCharArray()).FirstOrDefault().ToStr();
                 var builder = new SqlConnectionStringBuilder(databaseMetaData.ConnectionString);
                 var con = new SqlConnection(builder.ConnectionString);
                 con.Open();
 
                 string[] objArrRestrict;
-                var tParts = selectedTable.Split(".".ToCharArray());
+                var tParts = selectedTableWithDatabase.Split(".".ToCharArray());
                 objArrRestrict = new string[] {
                 tParts[0],
                 tParts[1],
@@ -236,22 +236,33 @@ namespace DotNetCodeGenerator.Domain.Repositories
                 DataTable tbl = con.GetSchema(SqlClientMetaDataCollectionNames.Columns, objArrRestrict);
 
                 SqlDataAdapter da = new SqlDataAdapter();
-
-                #region Get Primary Key
                 String primaryKey = "";
-                DataTable ttt = new DataTable();
-                SqlCommand cmd = new SqlCommand("select * from " + selectedTable);
-                cmd.Connection = con;
-                SqlDataAdapter daa = new SqlDataAdapter();
-                daa.SelectCommand = cmd;
-                //da.Fill(tl);
-                daa.FillSchema(ttt, SchemaType.Mapped);
-                primaryKey = DataTableHelper.GetPrimaryKeys(ttt);
+                try
+                {
+                    #region Get Primary Key
+                    DataTable ttt = new DataTable();
+                    SqlCommand cmd = new SqlCommand("select * from " + selectedTableWithDatabase);
+                    cmd.Connection = con;
+                    SqlDataAdapter daa = new SqlDataAdapter();
+                    daa.SelectCommand = cmd;
+                    //da.Fill(tl);
+                    daa.FillSchema(ttt, SchemaType.Mapped);
+                    primaryKey = DataTableHelper.GetPrimaryKeys(ttt);
 
-                #endregion
+                    #endregion
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, e.Message);
+                    throw e;
+                }
+
+
+
 
                 List<TableRowMetaData> TableRowMetaDataList = new List<TableRowMetaData>();
-                var selectedTableObj = databaseMetaData.Tables.FirstOrDefault(r => r.DatabaseTableName.Equals(selectedTable, StringComparison.InvariantCultureIgnoreCase));
+                var selectedTableObj = databaseMetaData.Tables.FirstOrDefault(r => r.DatabaseTableName.Equals(selectedTableWithDatabase, StringComparison.InvariantCultureIgnoreCase));
 
                 if (selectedTableObj != null)
                 {

@@ -50,8 +50,8 @@ namespace DotNetCoreCodeGenerator.UnitTest
             var repo = new TableRepository(logger);
 
           Console.WriteLine(configuration.GetConnectionString("DefaultConnection"));
-          repo.GetAllTables(configuration.GetConnectionString("DefaultConnection"));
-         // repo.GetSelectedTableMetaData(configuration.GetConnectionString("DefaultConnection"), "TestEY.dbo.Products");
+          var databaseMetaData = repo.GetAllTables(configuration.GetConnectionString("DefaultConnection"));
+          repo.GetSelectedTableMetaData(databaseMetaData, "TestEY.dbo.Products-Products");
         }
 
     }

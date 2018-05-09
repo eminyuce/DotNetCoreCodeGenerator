@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using DotNetCodeGenerator.Domain.Helpers
+@{
+    var name = ViewData["Name"].ToStr();
+    var value = ViewData["Value"].ToStr();
+    var resultLanguage = ViewData["ResultLanguage"].ToStr();
+}
+<h2>@name</h2>
+<div class="codeEditorDiv" id="@String.Format("{0}_Editor",name)"></div>
+<input type="text" data-code-result-hidden="@name" id="@name" data-code-result-language="@resultLanguage" value="@value" />

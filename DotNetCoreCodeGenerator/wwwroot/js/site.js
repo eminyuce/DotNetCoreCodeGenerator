@@ -47,7 +47,7 @@ $(document).ready(function () {
         var keyword = $TextBox_Filter.val();
         if (isEmpty(keyword)) {
             $('#SelectedTable').find('option').remove();
-            $('#SelectedTable').append($('#TableCopied').val());
+            fillOutOptions(JSON.parse($('#TableListCopied').val()));
             return;
         }
 
@@ -77,19 +77,17 @@ $(document).ready(function () {
             ajaxMethodCall(postData, "/Ajax/GetTables", function (data) {
                 var listitems = '';
                 var SelectedTableValue = $("#SelectedTableValue").val();
-                $("#SelectedTable").empty();
-                data.forEach(function (element) {
-                    console.log(element.TableNameWithSchema);
-
-                    $("#SelectedTable").append("<option value=" + element.DatabaseTableName+">" + element.TableNameWithSchema + "</option>");
-
-                });
-                $("#SelectedTable option").each(function () {
-                    console.log('OPTION:'+$(this).text());
-                });
-
+                fillOutOptions(data);
+                $("#TableListCopied").val(JSON.stringify(data));
             });
         }
+    }
+    function fillOutOptions(data) {
+        $("#SelectedTable").empty();
+        data.forEach(function (element) {
+            var p = "<option value=" + element.DatabaseTableName + ">" + element.TableNameWithSchema + "</option>";
+            $("#SelectedTable").append(p);
+        });
     }
     $('#SelectedTable').on('change', function () {
         $('#ModifiedTableName').val(this.value);

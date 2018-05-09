@@ -20,3 +20,7 @@ Finished granting yuce\SqlUser access to the IIS metabase and other directories 
 MAKE THAT WEB APP RUNNING UNDER ACCOUNT  [SQL_USER_NAME] (SqlUser) So that web app can have access database server.
 APPLICATION POOL --> Select right app pool whom the web app is running on the top of it. --> 
 Advanced Settings --> Under [Process Model] for [Identity], it should be [SQL_USER_NAME], in that case SqlUser
+
+Hosts file configuration for local DNS like below and  web site configuration in IIS, go to Bindings and define Host Name from below one.
+
+127.0.0.1 yourcodegenerator.com
