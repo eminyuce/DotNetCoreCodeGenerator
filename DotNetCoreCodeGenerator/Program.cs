@@ -95,7 +95,7 @@ namespace DotNetCoreCodeGenerator
             var builder = WebHost.CreateDefaultBuilder(args);
 
             appPublishedFolder = appPublishedFolder + "/publish";
-            builder.UseContentRoot(appPublishedFolder);
+       //     builder.UseContentRoot(appPublishedFolder);
 
             builder.UseStartup<Startup>();
             return builder.Build();

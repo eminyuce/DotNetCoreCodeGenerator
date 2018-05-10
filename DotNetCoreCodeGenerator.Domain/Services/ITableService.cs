@@ -11,6 +11,7 @@ namespace DotNetCodeGenerator.Domain.Services
         DatabaseMetadata GetAllMySqlTables(string connectionString);
         DatabaseMetadata GetAllTables(string connectionString);
         DatabaseMetadata GetAllTablesFromCache(string connectionString);
+        DatabaseMetadata GetAllMySqlTablesFromCache(string connectionString);
         DataSet GetDataSet(string sqlCommand, string connectionString);
     }
 }

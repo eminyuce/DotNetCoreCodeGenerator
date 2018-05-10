@@ -3,6 +3,7 @@ using DotNetCodeGenerator.Domain.Entities.Enums;
 using DotNetCodeGenerator.Domain.Helpers;
 using DotNetCodeGenerator.Domain.Repositories;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,18 +19,25 @@ namespace DotNetCodeGenerator.Domain.Services
         public ISqlParserHelper _sqlParserHelper { get; set; }
         public ITableRepository _tableRepository { get; set; }
         public ICodeProducerHelper _codeProducerHelper { get; set; }
+
+        public ILogger Logger;
+
         private IMemoryCache cache;
+
+
 
         public TableService(IMemoryCache cache,
             ITableRepository _tableRepository,
             ICodeProducerHelper _codeProducerHelper,
-             ISqlParserHelper _sqlParserHelper
+            ISqlParserHelper _sqlParserHelper,
+            ILogger<TableService> logger
             )
         {
             this._tableRepository = _tableRepository;
             this._codeProducerHelper = _codeProducerHelper;
             this._sqlParserHelper = _sqlParserHelper;
             this.cache = cache;
+            this.Logger = logger;
         }
 
         public DatabaseMetadata GetAllTablesFromCache(String connectionString)
@@ -39,12 +47,38 @@ namespace DotNetCodeGenerator.Domain.Services
             options.SlidingExpiration = TimeSpan.FromMinutes(1);
             options.Priority = CacheItemPriority.Normal;
 
-
-            var items = cache.Get<DatabaseMetadata>("DatabaseMetadata");
-            //if (items == null && items.Tables!=null)
+            string key = connectionString;
+            var items = cache.Get<DatabaseMetadata>(key);
+            if (items == null)
             {
                 items = GetAllTables(connectionString);
-                cache.Set("DatabaseMetadata",items,options);
+                cache.Set(key, items, options);
+                Logger.LogInformation("Setting  Sql Server Database Metadata To CACHE");
+            }
+            else
+            {
+                Logger.LogInformation("Getting Sql Server Database Metadata To CACHE");
+            }
+            return items;
+        }
+        public DatabaseMetadata GetAllMySqlTablesFromCache(String connectionString)
+        {
+            MemoryCacheEntryOptions options = new MemoryCacheEntryOptions();
+            options.AbsoluteExpiration = DateTime.Now.AddMinutes(1);
+            options.SlidingExpiration = TimeSpan.FromMinutes(1);
+            options.Priority = CacheItemPriority.Normal;
+
+            string key = connectionString;
+            var items = cache.Get<DatabaseMetadata>(key);
+            if (items == null)
+            {
+                items = GetAllMySqlTables(connectionString);
+                cache.Set(key, items, options);
+                Logger.LogInformation("Setting MySql Database Metadata To CACHE");
+            }
+            else
+            {
+                Logger.LogInformation("Getting MySql Database Metadata To CACHE");
             }
             return items;
         }
@@ -73,7 +107,7 @@ namespace DotNetCodeGenerator.Domain.Services
                 }
                 else if (!String.IsNullOrEmpty(codeGeneratorResult.MySqlConnectionString))
                 {
-                    databaseMetaData = this.GetAllMySqlTables(codeGeneratorResult.MySqlConnectionString);
+                    databaseMetaData = this.GetAllMySqlTablesFromCache(codeGeneratorResult.MySqlConnectionString);
                     _tableRepository.GetSelectedMysqlTableMetaData(databaseMetaData, codeGeneratorResult.SelectedTable);
                 }
                 codeGeneratorResult.DatabaseMetadata = databaseMetaData;
@@ -136,7 +170,7 @@ namespace DotNetCodeGenerator.Domain.Services
                }
                else if (!String.IsNullOrEmpty(codeGeneratorResult.MySqlConnectionString))
                {
-                   databaseMetaData = this.GetAllMySqlTables(codeGeneratorResult.MySqlConnectionString);
+                   databaseMetaData = this.GetAllMySqlTablesFromCache(codeGeneratorResult.MySqlConnectionString);
                    _tableRepository.GetSelectedMysqlTableMetaData(databaseMetaData, codeGeneratorResult.SelectedTable);
                }
                else if (!String.IsNullOrEmpty(codeGeneratorResult.SqlCreateTableStatement))

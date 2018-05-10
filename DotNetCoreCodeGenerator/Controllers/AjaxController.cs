@@ -55,7 +55,7 @@ namespace DotNetCoreCodeGenerator.Controllers
             }
             else if (!String.IsNullOrEmpty(mySqlConnectionString))
             {
-                var allTablesMetaData = TableService.GetAllMySqlTables(mySqlConnectionString);
+                var allTablesMetaData = TableService.GetAllMySqlTablesFromCache(mySqlConnectionString);
                 var resultHtml = (from t in allTablesMetaData.Tables
                                   select new
                                   {
