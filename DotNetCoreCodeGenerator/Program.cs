@@ -85,6 +85,7 @@ namespace DotNetCoreCodeGenerator
         //}
 
         //use: dotnet publish --configuration Release --output ./approot
+        // dotnet publish -c Release -o /root/Published
         //export ASPNETCORE_ENVIRONMENT = Development
         //echo $ASPNETCORE_ENVIRONMENT
         public static IWebHost BuildWebHost(string[] args)
@@ -94,8 +95,8 @@ namespace DotNetCoreCodeGenerator
 
             var builder = WebHost.CreateDefaultBuilder(args);
 
-            appPublishedFolder = appPublishedFolder + "/publish";
-       //     builder.UseContentRoot(appPublishedFolder);
+            //appPublishedFolder = appPublishedFolder + "/publish";
+           builder.UseContentRoot(appPublishedFolder);
 
             builder.UseStartup<Startup>();
             return builder.Build();

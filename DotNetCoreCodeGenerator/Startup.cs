@@ -18,6 +18,7 @@ using DotNetCodeGenerator.Domain.Helpers;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using System.IO;
 
 namespace DotNetCoreCodeGenerator
 {
@@ -61,7 +62,11 @@ namespace DotNetCoreCodeGenerator
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddNLog();
-            env.ConfigureNLog("nlog.config");
+           // Console.WriteLine("ContentRootPath:  " + env.ContentRootPath.Replace("DotNetCoreCodeGenerator","") + "nlog.config");
+           // Console.WriteLine("WebRootPath:  " + env.WebRootPath + "nlog.config");
+            var appPublishedFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            env.ConfigureNLog(appPublishedFolder + "/nlog.config");
+
 
 
             if (env.IsDevelopment())
@@ -72,6 +77,7 @@ namespace DotNetCoreCodeGenerator
             }
             else
             {
+      
                 app.UseExceptionHandler("/Home/Error");
             }
 
