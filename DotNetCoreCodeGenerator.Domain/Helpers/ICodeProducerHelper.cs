@@ -10,7 +10,7 @@ namespace DotNetCodeGenerator.Domain.Helpers
 
         void GenerateAspMvcControllerClass();
         void GenerateMySqlSaveOrUpdateStoredProcedure();
-        string GenerateNewInstance();
+        void GenerateNewInstance();
         void GenerateSaveOrUpdateStoredProcedure();
         void GenerateMergeSqlStoredProcedure();
         void GenerateSqlRepository();
