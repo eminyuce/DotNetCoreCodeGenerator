@@ -202,7 +202,7 @@ namespace DotNetCodeGenerator.Domain.Helpers
                                     p.ID = counter++;
                                     p.Order = counter++;
                                     p.DataType = RemoveBrackets(matches[1].Groups[0].ToStr());
-                                    p.DataTypeMaxChar = p.DataType + p.CharacterMaximumLength.ToStr();
+                                    p.DataTypeMaxChar = p.DataType + (p.CharacterMaximumLength != 0 ? p.CharacterMaximumLength.ToStr() : "");
                                     p.DatabaseType = DatabaseType.MsSql;
 
                                 }
@@ -341,7 +341,19 @@ namespace DotNetCodeGenerator.Domain.Helpers
         }
         private  bool IsLineColumnFieldLine(string line)
         {
-            return IsMySqlDataType(line) || IsSqlDataType(line);
+            if (line.StartsWith("/**"))
+            {
+                return false;
+            }
+            else if (line.StartsWith("--"))
+            {
+                return false;
+            }
+            else
+            {
+                return IsMySqlDataType(line) || IsSqlDataType(line);
+            }
+    
         }
         private  bool IsMySqlDataType(string line)
         {
