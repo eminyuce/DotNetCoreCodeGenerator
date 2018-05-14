@@ -193,7 +193,7 @@ namespace DotNetCodeGenerator.Domain.Helpers
                                     {
                                         r = new Regex(paranthesesRegex, RegexOptions.IgnoreCase | RegexOptions.Singleline);
                                         var matches3 = r.Matches(line);
-                                        p.MaxChar = matches3[0].Groups[0].ToStr();
+                                        p.CharacterMaximumLength = matches3[0].Groups[0].ToInt();
                                     }
 
                                     p.ColumnName = RemoveBrackets(matches[0].Groups[0].ToStr());
@@ -202,7 +202,7 @@ namespace DotNetCodeGenerator.Domain.Helpers
                                     p.ID = counter++;
                                     p.Order = counter++;
                                     p.DataType = RemoveBrackets(matches[1].Groups[0].ToStr());
-                                    p.DataTypeMaxChar = p.DataType + p.MaxChar.ToStr();
+                                    p.DataTypeMaxChar = p.DataType + p.CharacterMaximumLength.ToStr();
                                     p.DatabaseType = DatabaseType.MsSql;
 
                                 }
@@ -226,8 +226,8 @@ namespace DotNetCodeGenerator.Domain.Helpers
                                     {
                                         r = new Regex(paranthesesRegex, RegexOptions.IgnoreCase | RegexOptions.Singleline);
                                         var matches3 = r.Matches(line);
-                                        p.MaxChar = matches3[0].Groups[0].ToStr();
-                                        p.DataType = p.DataType.Replace("(" + p.MaxChar + ")", "");
+                                        p.CharacterMaximumLength = matches3[0].Groups[0].ToInt();
+                                        p.DataType = p.DataType.Replace("(" + p.CharacterMaximumLength + ")", "");
                                     }
 
                                     p.DataTypeMaxChar = lineParts[1];

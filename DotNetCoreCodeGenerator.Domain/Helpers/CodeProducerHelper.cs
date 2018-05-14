@@ -1080,6 +1080,9 @@ namespace DotNetCodeGenerator.Domain.Helpers
             method.AppendLine("}catch(Exception ex)");
             method.AppendLine("{");
             method.AppendLine("_logger.LogError(ex, ex.Message);");
+            method.AppendLine("         #if DEBUG");
+            method.AppendLine("         throw ex;");
+            method.AppendLine("         #endif");
             method.AppendLine("}");
             method.AppendLine("      return " + modelName.ToLower() + "Result;");
             method.AppendLine("}");
@@ -1092,6 +1095,9 @@ namespace DotNetCodeGenerator.Domain.Helpers
             method.AppendLine("}catch(Exception ex)");
             method.AppendLine("{");
             method.AppendLine("_logger.LogError(ex, ex.Message);");
+            method.AppendLine("         #if DEBUG");
+            method.AppendLine("         throw ex;");
+            method.AppendLine("         #endif");
             method.AppendLine("}");
             method.AppendLine("      return -1;");
             method.AppendLine("}");
@@ -1106,6 +1112,9 @@ namespace DotNetCodeGenerator.Domain.Helpers
             method.AppendLine("}catch(Exception ex)");
             method.AppendLine("{");
             method.AppendLine("_logger.LogError(ex, ex.Message);");
+            method.AppendLine("         #if DEBUG");
+            method.AppendLine("         throw ex;");
+            method.AppendLine("         #endif");
             method.AppendLine("}");
             method.AppendLine("      return item;");
             method.AppendLine("}");
@@ -1118,6 +1127,9 @@ namespace DotNetCodeGenerator.Domain.Helpers
             method.AppendLine("}catch(Exception ex)");
             method.AppendLine("{");
             method.AppendLine("_logger.LogError(ex, ex.Message);");
+            method.AppendLine("         #if DEBUG");
+            method.AppendLine("         throw ex;");
+            method.AppendLine("         #endif");
             method.AppendLine("}");
             method.AppendLine("}");
             method.AppendLine("public " + staticText + " void RemoveCache()");

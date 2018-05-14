@@ -51,36 +51,38 @@ namespace DotNetCodeGenerator.Domain.Helpers
 
             return result;
         }
-        public static string GetCSharpDataType(TableRowMetaData ki)
+        public static string GetCSharpDataType(TableRowMetaData c)
         {
-            var item = ki;
-            String result = "";
-            if (item.DataType.IndexOf("varchar") > -1 || item.DataType.IndexOf("text") > -1 || item.DataType.IndexOf("xml") > -1)
+            switch (c.DataType.ToLower())
             {
-                result = "String";
-            }
-            else if (item.DataType.IndexOf("int") > -1)
-            {
-                result = "int";
-            }
-            else if (item.DataType.IndexOf("date") > -1)
-            {
-                result = "DateTime ";
-            }
-            else if (item.DataType.IndexOf("bit") > -1)
-            {
-                result = "Boolean ";
-            }
-            else if (item.DataType.IndexOf("float") > -1)
-            {
-                result = "float ";
-            }
-            else if (item.DataType.IndexOf("char") > -1)
-            {
-                result = "char ";
+                case "char":
+                case "nchar":
+                case "varchar":
+                case "nvarchar":
+                    return "string";
+                case "numeric":
+                case "decimal":
+                    return c.IsNullable() ? "decimal?" : "decimal";
+                case "int":
+                    return c.IsNullable() ? "int?" : "int";
+                case "bigint":
+                    return c.IsNullable() ? "long?" : "long";
+                case "smallint":
+                    return c.IsNullable() ? "short?" : "short";
+                case "tinyint":
+                    return c.IsNullable() ? "byte?" : "byte";
+                case "bit":
+                    return c.IsNullable() ? "bool?" : "bool";
+                case "datetime":
+                case "datetime2":
+                    return c.IsNullable() ? "DateTime?" : "DateTime";
+                case "binary":
+                case "varbinary":
+                    return "byte[]";
+                default:
+                    return c.DataType;
             }
 
-            return result.Trim();
         }
        
         public static string GetPrimaryKeys(List<TableRowMetaData> tableRowMetaDataList)

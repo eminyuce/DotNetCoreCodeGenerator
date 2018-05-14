@@ -16,11 +16,12 @@ namespace DotNetCodeGenerator.Domain.Repositories
     {
 
 
-        private readonly ILogger _logger;
+        private readonly ILogger Logger;
+
 
         public TableRepository(ILogger<TableRepository> logger)
         {
-            _logger = logger;
+            Logger = logger;
         }
 
 
@@ -58,46 +59,56 @@ namespace DotNetCodeGenerator.Domain.Repositories
                 int i = 0;
                 foreach (DataRow rowTable in tbl.Rows)
                 {
-
-                    String TABLE_CATALOG = rowTable["TABLE_CATALOG"].ToStr();
-                    String TABLE_SCHEMA = rowTable["TABLE_SCHEMA"].ToStr();
-                    String TABLE_NAME = rowTable["TABLE_NAME"].ToStr();
-                    String COLUMN_NAME = rowTable["COLUMN_NAME"].ToStr();
-                    String ORDINAL_POSITION = rowTable["ORDINAL_POSITION"].ToStr();
-                    String COLUMN_DEFAULT = rowTable["COLUMN_DEFAULT"].ToStr();
-                    String IS_NULLABLE = rowTable["IS_NULLABLE"].ToStr();
-                    String DATA_TYPE = rowTable["DATA_TYPE"].ToStr();
-                    String CHARACTER_MAXIMUM_LENGTH = rowTable["CHARACTER_MAXIMUM_LENGTH"].ToStr();
-                    //String NUMERIC_PRECISION = rowTable.Table.Columns.Contains("NUMERIC_PRECISION") ? rowTable["NUMERIC_PRECISION "].ToStr() : "";
-                    //String NUMERIC_SCALE = rowTable["NUMERIC_SCALE"].ToStr();
-                    //String CHARACTER_SET_NAME = rowTable["CHARACTER_SET_NAME"].ToStr();
-                    //String COLLATION_NAME = rowTable["COLLATION_NAME"].ToStr();
-                    //String COLUMN_TYPE = rowTable["COLUMN_TYPE"].ToStr();
-                    String COLUMN_KEY = DataTableHelper.GetValue(rowTable, "COLUMN_KEY").ToStr();
-                    //String EXTRA = rowTable["EXTRA"].ToStr();
-                    //String PRIVILEGES = rowTable["PRIVILEGES"].ToStr();
-                    //String COLUMN_COMMENT = rowTable["COLUMN_COMMENT"].ToStr();
-
-
-                    var k = new TableRowMetaData();
-                    k.DatabaseType = DatabaseType.MySql;
-                    k.ID = i++;
-
-                    k.ColumnName = COLUMN_NAME;
-                    k.DataType = DATA_TYPE;
-                    k.IsNull = IS_NULLABLE;
-                    k.MaxChar = CHARACTER_MAXIMUM_LENGTH;
-                    k.DataTypeMaxChar = k.DataType;
-                    if (k.DataType.Contains("varchar"))
+                    try
                     {
-                        k.MaxChar = CHARACTER_MAXIMUM_LENGTH.Equals("-1") ? "4000" : CHARACTER_MAXIMUM_LENGTH;
-                        k.DataTypeMaxChar = k.DataType + "(" + k.MaxChar + ")";
-                    }
-                    k.Order = ORDINAL_POSITION.ToInt();
-                    k.ID = ++i;
-                    k.PrimaryKey = COLUMN_KEY.Equals("PRI", StringComparison.InvariantCultureIgnoreCase);
 
-                    TableRowMetaDataList.Add(k);
+
+                        String TABLE_CATALOG = rowTable["TABLE_CATALOG"].ToStr();
+                        String TABLE_SCHEMA = rowTable["TABLE_SCHEMA"].ToStr();
+                        String TABLE_NAME = rowTable["TABLE_NAME"].ToStr();
+                        String COLUMN_NAME = rowTable["COLUMN_NAME"].ToStr();
+                        String ORDINAL_POSITION = rowTable["ORDINAL_POSITION"].ToStr();
+                        String COLUMN_DEFAULT = rowTable["COLUMN_DEFAULT"].ToStr();
+                        String IS_NULLABLE = rowTable["IS_NULLABLE"].ToStr();
+                        String DATA_TYPE = rowTable["DATA_TYPE"].ToStr();
+                        var CHARACTER_MAXIMUM_LENGTH = rowTable["CHARACTER_MAXIMUM_LENGTH"].ToInt();
+                        var NUMERIC_PRECISION = DataTableHelper.GetValueInt(rowTable, "NUMERIC_PRECISION", 0);
+                        var NUMERIC_SCALE = DataTableHelper.GetValueInt(rowTable, "NUMERIC_SCALE", 0);
+                        //String CHARACTER_SET_NAME = rowTable["CHARACTER_SET_NAME"].ToStr();
+                        //String COLLATION_NAME = rowTable["COLLATION_NAME"].ToStr();
+                        //String COLUMN_TYPE = rowTable["COLUMN_TYPE"].ToStr();
+                        String COLUMN_KEY = DataTableHelper.GetValueString(rowTable, "COLUMN_KEY","");
+                        //String EXTRA = rowTable["EXTRA"].ToStr();
+                        //String PRIVILEGES = rowTable["PRIVILEGES"].ToStr();
+                        //String COLUMN_COMMENT = rowTable["COLUMN_COMMENT"].ToStr();
+
+
+                        var k = new TableRowMetaData();
+                        k.DatabaseType = DatabaseType.MySql;
+                        k.ID = i++;
+                        k.ColumnName = COLUMN_NAME;
+                        k.DataType = DATA_TYPE;
+                        k.IsNull = IS_NULLABLE;
+                        k.CharacterMaximumLength = CHARACTER_MAXIMUM_LENGTH;
+                        k.DataTypeMaxChar = k.DataType;
+                        k.NumericPrecision = NUMERIC_PRECISION;
+                        k.NumericScale = NUMERIC_SCALE;
+                        if (k.DataType.Contains("varchar"))
+                        {
+                            k.CharacterMaximumLength = CHARACTER_MAXIMUM_LENGTH;
+                            k.DataTypeMaxChar = k.DataType + "(" + k.CharacterMaximumLength + ")";
+                        }
+                        k.Order = ORDINAL_POSITION.ToInt();
+                        k.ID = ++i;
+                        k.PrimaryKey = COLUMN_KEY.Equals("PRI", StringComparison.InvariantCultureIgnoreCase);
+
+                        TableRowMetaDataList.Add(k);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogError(ex.Message);
+                    }
                 }
 
             }
@@ -165,7 +176,7 @@ namespace DotNetCodeGenerator.Domain.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogError(e, e.Message);
+                Logger.LogError(e, e.Message);
                 throw e;
             }
 
@@ -210,7 +221,7 @@ namespace DotNetCodeGenerator.Domain.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogError(e, e.Message);
+                Logger.LogError(e, e.Message);
                 throw e;
             }
 
@@ -254,7 +265,7 @@ namespace DotNetCodeGenerator.Domain.Repositories
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, e.Message);
+                    Logger.LogError(e, e.Message);
                     throw e;
                 }
 
@@ -272,45 +283,57 @@ namespace DotNetCodeGenerator.Domain.Repositories
 
                     foreach (DataRow rowTable in tbl.Rows)
                     {
-                        String TABLE_CATALOG = rowTable["TABLE_CATALOG"].ToStr();
-                        String TABLE_SCHEMA = rowTable["TABLE_SCHEMA"].ToStr();
-                        String TABLE_NAME = rowTable["TABLE_NAME"].ToStr();
-                        String COLUMN_NAME = rowTable["COLUMN_NAME"].ToStr();
-                        String ORDINAL_POSITION = rowTable["ORDINAL_POSITION"].ToStr();
-                        String COLUMN_DEFAULT = rowTable["COLUMN_DEFAULT"].ToStr();
-                        String IS_NULLABLE = rowTable["IS_NULLABLE"].ToStr();
-                        String DATA_TYPE = rowTable["DATA_TYPE"].ToStr();
-                        String CHARACTER_MAXIMUM_LENGTH = rowTable["CHARACTER_MAXIMUM_LENGTH"].ToStr();
-                        String CHARACTER_OCTET_LENGTH = rowTable["CHARACTER_OCTET_LENGTH"].ToStr();
-                        String NUMERIC_PRECISION = rowTable["NUMERIC_PRECISION"].ToStr();
-                        String NUMERIC_PRECISION_RADIX = rowTable["NUMERIC_PRECISION_RADIX"].ToStr();
-                        String NUMERIC_SCALE = rowTable["NUMERIC_SCALE"].ToStr();
-                        String DATETIME_PRECISION = rowTable["DATETIME_PRECISION"].ToStr();
-                        String CHARACTER_SET_CATALOG = rowTable["CHARACTER_SET_CATALOG"].ToStr();
-                        String CHARACTER_SET_SCHEMA = rowTable["CHARACTER_SET_SCHEMA"].ToStr();
-                        String CHARACTER_SET_NAME = rowTable["CHARACTER_SET_NAME"].ToStr();
-                        String COLLATION_CATALOG = rowTable["COLLATION_CATALOG"].ToStr();
-                        String IS_SPARSE = rowTable["IS_SPARSE"].ToStr();
-                        String IS_COLUMN_SET = rowTable["IS_COLUMN_SET"].ToStr();
-                        String IS_FILESTREAM = rowTable["IS_FILESTREAM"].ToStr();
-
-
-                        var k = new TableRowMetaData();
-                        k.DatabaseType = DatabaseType.MsSql;
-                        k.ColumnName = COLUMN_NAME;
-                        k.DataType = DATA_TYPE;
-                        k.IsNull = IS_NULLABLE;
-                        k.MaxChar = CHARACTER_MAXIMUM_LENGTH;
-                        k.DataTypeMaxChar = k.DataType;
-                        if (k.DataType.Contains("varchar"))
+                        try
                         {
-                            k.MaxChar = CHARACTER_MAXIMUM_LENGTH.Equals("-1") ? "4000" : CHARACTER_MAXIMUM_LENGTH;
-                            k.DataTypeMaxChar = k.DataType + "(" + k.MaxChar + ")";
+                            String TABLE_CATALOG = rowTable["TABLE_CATALOG"].ToStr();
+                            String TABLE_SCHEMA = rowTable["TABLE_SCHEMA"].ToStr();
+                            String TABLE_NAME = rowTable["TABLE_NAME"].ToStr();
+                            String COLUMN_NAME = rowTable["COLUMN_NAME"].ToStr();
+                            String ORDINAL_POSITION = rowTable["ORDINAL_POSITION"].ToStr();
+                            String COLUMN_DEFAULT = rowTable["COLUMN_DEFAULT"].ToStr();
+                            String IS_NULLABLE = rowTable["IS_NULLABLE"].ToStr();
+                            String DATA_TYPE = rowTable["DATA_TYPE"].ToStr();
+                            var CHARACTER_MAXIMUM_LENGTH = rowTable["CHARACTER_MAXIMUM_LENGTH"].ToInt();
+                            String CHARACTER_OCTET_LENGTH = rowTable["CHARACTER_OCTET_LENGTH"].ToStr();
+                            var NUMERIC_PRECISION = rowTable["NUMERIC_PRECISION"].ToInt();
+                            var NUMERIC_PRECISION_RADIX = rowTable["NUMERIC_PRECISION_RADIX"].ToStr();
+                            var NUMERIC_SCALE = rowTable["NUMERIC_SCALE"].ToInt();
+                            String DATETIME_PRECISION = rowTable["DATETIME_PRECISION"].ToStr();
+                            String CHARACTER_SET_CATALOG = rowTable["CHARACTER_SET_CATALOG"].ToStr();
+                            String CHARACTER_SET_SCHEMA = rowTable["CHARACTER_SET_SCHEMA"].ToStr();
+                            String CHARACTER_SET_NAME = rowTable["CHARACTER_SET_NAME"].ToStr();
+                            String COLLATION_CATALOG = rowTable["COLLATION_CATALOG"].ToStr();
+                            String IS_SPARSE = rowTable["IS_SPARSE"].ToStr();
+                            String IS_COLUMN_SET = rowTable["IS_COLUMN_SET"].ToStr();
+                            String IS_FILESTREAM = rowTable["IS_FILESTREAM"].ToStr();
+
+
+                            var k = new TableRowMetaData();
+                            k.DatabaseType = DatabaseType.MsSql;
+                            k.ColumnName = COLUMN_NAME;
+                            k.DataType = DATA_TYPE;
+                            k.IsNull = IS_NULLABLE;
+                            k.CharacterMaximumLength = CHARACTER_MAXIMUM_LENGTH;
+                           
+                            if (k.DataType.Contains("varchar"))
+                            {
+                                k.CharacterMaximumLength = CHARACTER_MAXIMUM_LENGTH;
+                              //  k.DataTypeMaxChar = k.DataType + "(" + k.CharacterMaximumLength + ")";
+                            }
+
+                            k.DataTypeMaxChar = k.TypeDeclaration();
+                            k.Order = ORDINAL_POSITION.ToInt();
+                            k.ID = ++i;
+                            k.PrimaryKey = COLUMN_NAME == primaryKey;
+                            TableRowMetaDataList.Add(k);
+
                         }
-                        k.Order = ORDINAL_POSITION.ToInt();
-                        k.ID = ++i;
-                        k.PrimaryKey = COLUMN_NAME == primaryKey;
-                        TableRowMetaDataList.Add(k);
+                        catch (Exception ex)
+                        {
+
+                            throw;
+                        }
+                     
                     }
 
                 }
@@ -319,7 +342,7 @@ namespace DotNetCodeGenerator.Domain.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogError(e, e.Message);
+                Logger.LogError(e, e.Message);
                 throw e;
             }
 
@@ -375,7 +398,7 @@ namespace DotNetCodeGenerator.Domain.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogError(e, e.Message);
+                Logger.LogError(e, e.Message);
                 throw e;
             }
             return ds;

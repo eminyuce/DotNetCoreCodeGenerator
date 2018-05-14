@@ -9,9 +9,29 @@ namespace DotNetCodeGenerator.Domain.Helpers
 {
     public class DataTableHelper
     {
-        public static object GetValue(DataRow row, string column)
+        public static bool GetValueBoolean(DataRow row, string column, bool defaultValue)
         {
-            return row.Table.Columns.Contains(column) ? row[column] : null;
+            return GetValue(row, column, defaultValue).ToBool();
+        }
+        public static string GetValueString(DataRow row, string column, string defaultValue)
+        {
+            return GetValue(row, column, defaultValue).ToStr();
+        }
+        public static int GetValueInt(DataRow row, string column, int defaultValue)
+        {
+            return GetValue(row, column, defaultValue).ToInt();
+        }
+        private static object GetValue(DataRow row, string column, object defaultValue)
+        {
+            try
+            {
+                return row.Table.Columns.Contains(column) ? row[column] : defaultValue;
+            }
+            catch (Exception ex)
+            {
+                return defaultValue;
+            }
+
         }
         public static string GetPrimaryKeys(DataTable myTable)
         {

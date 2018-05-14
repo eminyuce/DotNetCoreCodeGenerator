@@ -15,7 +15,7 @@ namespace DotNetCodeGenerator.Domain.Entities
         public String ColumnNameInput { get { return String.Format("p_{0}", ColumnName); }  }
         public String IsNull { set; get; }
         public String DataType { set; get; }
-        public String MaxChar { set; get; }
+        public int CharacterMaximumLength { set; get; }
         public String DataTypeMaxChar { set; get; }
         public String CssClass { set; get; }
         public int Order { set; get; }
@@ -23,6 +23,9 @@ namespace DotNetCodeGenerator.Domain.Entities
         public bool PrimaryKey { set; get; }
         public String ControlID { set; get; }
         public bool ForeignKey { get; set; }
+        public int NumericPrecision { get; set; }
+        public int NumericScale { get; set; }
+ 
         public string ColumnDefaultValue
         {
             get
@@ -65,7 +68,29 @@ namespace DotNetCodeGenerator.Domain.Entities
 
         public override string ToString()
         {
-            return String.Format("{0} {1} {2} {3} {4}", ColumnName, DataType, DataTypeMaxChar, MaxChar, IsNull);
+            return String.Format("{0} {1} {2} {3} {4}", ColumnName, DataType, DataTypeMaxChar, CharacterMaximumLength, IsNull);
+        }
+
+        public bool IsNullable() => string.Equals("YES", IsNull, StringComparison.OrdinalIgnoreCase);
+        public string TypeDeclaration()
+        {
+            const string max = "max";
+            switch (DataType.ToLower())
+            {
+                case "binary":
+                case "varbinary":
+                case "char":
+                case "nchar":
+                case "varchar":
+                case "nvarchar":
+                    var len = CharacterMaximumLength == -1 ? max : CharacterMaximumLength.ToString();
+                    return $"{DataType}({len})";
+                case "numeric":
+                case "decimal":
+                    return $"{DataType}({NumericPrecision},{NumericScale})";
+                default:
+                    return DataType;
+            }
         }
     }
 }
