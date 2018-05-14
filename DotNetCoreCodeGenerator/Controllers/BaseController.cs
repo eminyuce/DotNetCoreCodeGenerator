@@ -8,6 +8,9 @@ namespace DotNetCoreCodeGenerator.Controllers
 {
     public abstract class BaseController : Controller
     {
-         
+        public BaseController()
+        {
+
+        }
     }
 }

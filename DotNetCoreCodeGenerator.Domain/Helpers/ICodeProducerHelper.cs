@@ -12,6 +12,7 @@ namespace DotNetCodeGenerator.Domain.Helpers
         void GenerateMySqlSaveOrUpdateStoredProcedure();
         string GenerateNewInstance();
         void GenerateSaveOrUpdateStoredProcedure();
+        void GenerateMergeSqlStoredProcedure();
         void GenerateSqlRepository();
         void GenerateStoredProcExecutionCode();
         void GenerateTableItem();

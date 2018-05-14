@@ -1720,7 +1720,111 @@ namespace DotNetCodeGenerator.Domain.Helpers
             CodeGeneratorResult.AspMvcControllerClass = built.ToString();
         }
 
+        public void GenerateMergeSqlStoredProcedure()
+        {
+
+            StringBuilder built = new StringBuilder();
+
+            List<TableRowMetaData> list = DatabaseMetadata.SelectedTable.TableRowMetaDataList;
+            TableRowMetaData prKey = TableRowMetaDataHelper.GetPrimaryKeysObj(list);
+            try
+            {
+                String realEntityName = CodeGeneratorResult.SelectedTable;
+                String modelName = CodeGeneratorResult.ModifiedTableName;
+                String modifiedTableName = CodeGeneratorResult.ModifiedTableName;
+                string selectedTable = DatabaseMetadata.SelectedTable.TableNameWithSchema;
+                String entityPrefix = GeneralHelper.GetEntityPrefixName(realEntityName);
+                String primaryKey = TableRowMetaDataHelper.GetPrimaryKeys(list);
+                string primaryKeyOrginal = primaryKey;
+                String staticText = CodeGeneratorResult.IsMethodStatic ? "static" : "";
+
+                entityPrefix = (String.IsNullOrEmpty(entityPrefix) ? "" : entityPrefix + "_");
 
 
+
+                built = new StringBuilder();
+                built.AppendLine("CREATE PROCEDURE  " + entityPrefix + "Merge" + modifiedTableName + "(");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = list[i];
+                    var comma = (i != (list.Count - 1) ? "," : "");
+                    built.AppendLine("@" + GeneralHelper.GetUrlString(item.ColumnName) + " " + item.DataTypeMaxChar + " = " + (String.IsNullOrEmpty(item.ColumnDefaultValue) ? "NULL" : item.ColumnDefaultValue) + comma);
+                }
+
+                built.Append(")");
+                built.AppendLine("AS");
+                built.AppendLine("BEGIN");
+                built.AppendLine("DECLARE @Output TABLE ( ActionType NVARCHAR(20)," +
+                    " SourcePrimaryKey  INT NOT NULL --PRIMARY KEY NONCLUSTERED");
+                built.AppendLine(");");
+                built.AppendLine("MERGE " + selectedTable + " TRGT  ");
+                built.AppendLine("USING (");
+                built.AppendLine("    SELECT ");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = list[i];
+                    var comma = (i != (list.Count - 1) ? "," : "");
+                        built.AppendLine(String.Format("@{0} {0} {1}",GeneralHelper.GetUrlString(item.ColumnName), comma));
+                }
+
+                built.AppendLine(") SRC ");
+                built.AppendLine(" ON TRGT." + primaryKey+"=SRC."+ primaryKey);
+                built.AppendLine(" WHEN NOT MATCHED BY TARGET THEN INSERT (");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = list[i];
+                    var comma = (i != (list.Count - 1) ? "," : "");
+                    if (!item.PrimaryKey)
+                        built.AppendLine(item.ColumnName + comma);
+                }
+
+                built.AppendLine(")");
+                built.AppendLine("VALUES (");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = list[i];
+                    var comma = (i != (list.Count - 1) ? "," : "");
+                    if (!item.PrimaryKey)
+                    {
+                        built.AppendLine("SRC."+GeneralHelper.GetUrlString(item.ColumnName) + comma);
+                    }
+                }
+                built.AppendLine(")");
+                built.AppendLine("WHEN MATCHED AND ");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = list[i];
+                    var OR = (i != (list.Count - 1) ? " OR " : "");
+                    if (!item.PrimaryKey)
+                    {
+                        built.AppendLine(String.Format("TRGT.{0}", item.ColumnName) + " <> SRC." + GeneralHelper.GetUrlString(item.ColumnName)+ OR);
+                    }
+                }
+                built.AppendLine("THEN UPDATE SET");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = list[i];
+                    var comma = (i != (list.Count - 1) ? "," : "");
+                    if (!item.PrimaryKey)
+                    {
+                        built.AppendLine(String.Format("[{0}]", item.ColumnName) + " = SRC." + GeneralHelper.GetUrlString(item.ColumnName) + comma);
+                    }
+                }
+                built.AppendLine("--WHEN NOT MATCHED BY SOURCE THEN ");
+                built.AppendLine("--DELETE");
+                built.AppendLine(" OUTPUT $action,");
+                built.AppendLine(" INSERTED."+primaryKey+ " AS " + primaryKey + " INTO @Output;");
+                built.AppendLine(" SELECT TOP 1 SourcePrimaryKey from @Output");
+                built.AppendLine(" END");
+                built.AppendLine(" GO");
+                CodeGeneratorResult.MergeSqlStoredProcedure = built.ToString();
+                _logger.LogTrace("CodeGeneratorResult.GenerateMergeSqlStoredProcedure:" + built.ToString());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                CodeGeneratorResult.MergeSqlStoredProcedure = ex.Message;
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using DotNetCodeGenerator.Domain.Repositories;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using DotNetCodeGenerator.Domain.Helpers;
 
 namespace DotNetCoreCodeGenerator.UnitTest
 {
@@ -49,9 +50,15 @@ namespace DotNetCoreCodeGenerator.UnitTest
 
             var repo = new TableRepository(logger);
 
-          Console.WriteLine(configuration.GetConnectionString("DefaultConnection"));
-          var databaseMetaData = repo.GetAllTables(configuration.GetConnectionString("DefaultConnection"));
-          repo.GetSelectedTableMetaData(databaseMetaData, "TestEY.dbo.Products-Products");
+            Console.WriteLine(configuration.GetConnectionString("DefaultConnection"));
+            var databaseMetaData = repo.GetAllTables(configuration.GetConnectionString("DefaultConnection"));
+            repo.GetSelectedTableMetaData(databaseMetaData, "TestEY.dbo.TestTable-TestTable");
+            var p = new CodeProducerHelper(factory.CreateLogger<CodeProducerHelper>());
+            p.DatabaseMetadata = databaseMetaData;
+            p.CodeGeneratorResult = new DotNetCodeGenerator.Domain.Entities.CodeGeneratorResult();
+            p.GenerateMergeSqlStoredProcedure();
+            Console.WriteLine(p.CodeGeneratorResult.MergeSqlStoredProcedure);
+
         }
 
     }

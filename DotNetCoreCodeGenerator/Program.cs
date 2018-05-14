@@ -22,9 +22,12 @@ namespace DotNetCoreCodeGenerator
 
         public static void Main(string[] args)
         {
-            //Console.WriteLine("Assembly.GetEntryAssembly().Location:" + Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
-            //Console.WriteLine("AppDomain.CurrentDomain.BaseDirectory:" + AppDomain.CurrentDomain.BaseDirectory);
-            //Console.WriteLine("System.IO.Directory.GetCurrentDirectory:" + System.IO.Directory.GetCurrentDirectory());
+            Console.WriteLine("Assembly.GetEntryAssembly().Location:" + 
+                Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
+            Console.WriteLine("AppDomain.CurrentDomain.BaseDirectory:" +
+                AppDomain.CurrentDomain.BaseDirectory);
+            Console.WriteLine("System.IO.Directory.GetCurrentDirectory:" +
+                System.IO.Directory.GetCurrentDirectory());
 
 
             BuildWebHost(args).Run();
@@ -96,8 +99,8 @@ namespace DotNetCoreCodeGenerator
             var builder = WebHost.CreateDefaultBuilder(args);
 
             //appPublishedFolder = appPublishedFolder + "/publish";
-           builder.UseContentRoot(appPublishedFolder);
-
+            builder.UseContentRoot(appPublishedFolder);
+         //   builder.UseContentRoot(Directory.GetCurrentDirectory());
             builder.UseStartup<Startup>();
             return builder.Build();
         }

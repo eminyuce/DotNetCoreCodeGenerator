@@ -2,6 +2,7 @@
 using DotNetCodeGenerator.Domain.Entities.Enums;
 using DotNetCodeGenerator.Domain.Helpers;
 using DotNetCodeGenerator.Domain.Repositories;
+using DotNetCoreCodeGenerator.Domain;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
@@ -19,6 +20,7 @@ namespace DotNetCodeGenerator.Domain.Services
         public ISqlParserHelper _sqlParserHelper { get; set; }
         public ITableRepository _tableRepository { get; set; }
         public ICodeProducerHelper _codeProducerHelper { get; set; }
+        public MyAppSetttings AppSetttings { get; set; }
 
         public ILogger Logger;
 
@@ -30,7 +32,8 @@ namespace DotNetCodeGenerator.Domain.Services
             ITableRepository _tableRepository,
             ICodeProducerHelper _codeProducerHelper,
             ISqlParserHelper _sqlParserHelper,
-            ILogger<TableService> logger
+            ILogger<TableService> logger,
+            MyAppSetttings appSetttings
             )
         {
             this._tableRepository = _tableRepository;
@@ -38,13 +41,13 @@ namespace DotNetCodeGenerator.Domain.Services
             this._sqlParserHelper = _sqlParserHelper;
             this.cache = cache;
             this.Logger = logger;
+            this.AppSetttings = appSetttings;
         }
 
         public DatabaseMetadata GetAllTablesFromCache(String connectionString)
         {
             MemoryCacheEntryOptions options = new MemoryCacheEntryOptions();
-            options.AbsoluteExpiration = DateTime.Now.AddMinutes(1);
-            options.SlidingExpiration = TimeSpan.FromMinutes(1);
+            options.AbsoluteExpiration = DateTime.Now.AddSeconds(AppSetttings.CacheMediumSeconds);
             options.Priority = CacheItemPriority.Normal;
 
             string key = connectionString;
@@ -64,8 +67,7 @@ namespace DotNetCodeGenerator.Domain.Services
         public DatabaseMetadata GetAllMySqlTablesFromCache(String connectionString)
         {
             MemoryCacheEntryOptions options = new MemoryCacheEntryOptions();
-            options.AbsoluteExpiration = DateTime.Now.AddMinutes(1);
-            options.SlidingExpiration = TimeSpan.FromMinutes(1);
+            options.AbsoluteExpiration = DateTime.Now.AddSeconds(AppSetttings.CacheMediumSeconds);
             options.Priority = CacheItemPriority.Normal;
 
             string key = connectionString;
@@ -131,6 +133,7 @@ namespace DotNetCodeGenerator.Domain.Services
             // Database related code.
             if (databaseMetaData.DatabaseType == DatabaseType.MsSql || databaseMetaData.DatabaseType == DatabaseType.UnKnown)
             {
+                tasks.Add(Task.Factory.StartNew(() => { _codeProducerHelper.GenerateMergeSqlStoredProcedure(); }));
                 tasks.Add(Task.Factory.StartNew(() => { _codeProducerHelper.GenerateSaveOrUpdateStoredProcedure(); }));
                 tasks.Add(Task.Factory.StartNew(() => { _codeProducerHelper.GenerateSqlRepository(); }));
                 tasks.Add(Task.Factory.StartNew(() => { _codeProducerHelper.GenerateStoredProcExecutionCode(); }));

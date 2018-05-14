@@ -57,6 +57,6 @@ namespace DotNetCodeGenerator.Domain.Entities
         public string MySqlDatabaseOperation { get; set; }
         public string MySqlSaveOrUpdateStoredProc { get; set; }
         public string WebApiController { get; set; }
-
+        public string MergeSqlStoredProcedure { get;  set; }
     }
 }

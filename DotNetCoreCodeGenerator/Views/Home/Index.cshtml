@@ -152,7 +152,15 @@ new ViewDataDictionary(this.ViewData) {
 { "ResultLanguage", "csharp" } })
 
             </div>
+            <div class="form-group">
 
+                @await Html.PartialAsync("_ResultCodePartial",
+new ViewDataDictionary(this.ViewData) {
+{ "Name", "MergeSqlStoredProcedure" },
+{ "Value", Model.MergeSqlStoredProcedure },
+{ "ResultLanguage", "sql" } })
+
+            </div>
             <div class="form-group">
                 @await Html.PartialAsync("_ResultCodePartial",
 new ViewDataDictionary(this.ViewData) {
