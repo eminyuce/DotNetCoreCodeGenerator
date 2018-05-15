@@ -10,6 +10,7 @@ namespace DotNetCoreCodeGenerator.Domain
 {
     public class MyAppSetttings
     {
+        public const string ConnectionStringKey = "DefaultConnection";
         private IConfiguration Configuration { get; set; }
         private ILogger Logger { get; set; }
         public MyAppSetttings(IConfiguration config, ILogger<MyAppSetttings> logger)

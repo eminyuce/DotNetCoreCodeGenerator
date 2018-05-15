@@ -23,6 +23,10 @@ namespace DotNetCoreCodeGenerator.Controllers
             TableService = _tableService;
             Logger = _logger;
         }
+        public IActionResult WizardTest()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             Logger.LogInformation("HomeController Index page");
