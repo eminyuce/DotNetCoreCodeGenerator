@@ -213,3 +213,152 @@
   213  cd DotNetCoreCodeGenerator/bin/in
   214  dotnet DotNetCoreCodeGenerator/bin/Release/netcoreapp2.0/DotNetCoreCodeGenerator.dll
   215  history >> history.txt
+  login as: root
+Authenticating with public key "ed25519-key-20180502"
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-109-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+88 packages can be updated.
+0 updates are security updates.
+
+
+*** System restart required ***
+-------------------------------------------------------------------------------
+
+Thank you for using DigitalOcean's MySQL 1-Click.
+
+For your convience, phpMyAdmin has been installed to help you manage your
+Database server. You may connect to it via:
+    URL:      http://206.81.12.113/phpmyadmin
+    Username: admin
+    Password: 250092acaa04f1f52c15a56be3fbe2519233570a6e9146b3
+
+The details of your PHP installation can be seen at http://206.81.12.113/info.php
+
+Passwords have been saved to /root/.digitalocean_password
+
+You are encouraged to run mysql_secure_installation to ready your server for
+production.
+
+The UFW firewall is enabled. All ports execpt for SSH, HTTP/HTTPS and MySQL
+are blocked by default.
+
+-------------------------------------------------------------------------------
+To delete this message of the day: rm -rf /etc/update-motd.d/99-one-click
+root@mysql-s-1vcpu-1gb-nyc1-01:~# sudo nano /etc/my.cnf
+root@mysql-s-1vcpu-1gb-nyc1-01:~# sudo nano /etc/my.cnf
+root@mysql-s-1vcpu-1gb-nyc1-01:~# sudo nano /etc/my.cnf
+root@mysql-s-1vcpu-1gb-nyc1-01:~# sudo nano /etc/my.cnf
+root@mysql-s-1vcpu-1gb-nyc1-01:~# /etc/init.d/mysql restart
+[ ok ] Restarting mysql (via systemctl): mysql.service.
+root@mysql-s-1vcpu-1gb-nyc1-01:~# mysql -u root -p mysql
+Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+root@mysql-s-1vcpu-1gb-nyc1-01:~# mysql -u root -p mysql
+Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+root@mysql-s-1vcpu-1gb-nyc1-01:~#
+login as: root
+Authenticating with public key "ed25519-key-20180502"
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-109-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+88 packages can be updated.
+0 updates are security updates.
+
+
+*** System restart required ***
+-------------------------------------------------------------------------------
+
+Thank you for using DigitalOcean's MySQL 1-Click.
+
+For your convience, phpMyAdmin has been installed to help you manage your
+Database server. You may connect to it via:
+    URL:      http://206.81.12.113/phpmyadmin
+    Username: admin
+    Password: 250092acaa04f1f52c15a56be3fbe2519233570a6e9146b3
+
+The details of your PHP installation can be seen at http://206.81.12.113/info.php
+
+Passwords have been saved to /root/.digitalocean_password
+
+You are encouraged to run mysql_secure_installation to ready your server for
+production.
+
+The UFW firewall is enabled. All ports execpt for SSH, HTTP/HTTPS and MySQL
+are blocked by default.
+
+-------------------------------------------------------------------------------
+To delete this message of the day: rm -rf /etc/update-motd.d/99-one-click
+root@mysql-s-1vcpu-1gb-nyc1-01:~# sudo nano /etc/my.cnf
+root@mysql-s-1vcpu-1gb-nyc1-01:~# sudo nano /etc/my.cnf
+root@mysql-s-1vcpu-1gb-nyc1-01:~# sudo nano /etc/my.cnf
+root@mysql-s-1vcpu-1gb-nyc1-01:~# sudo nano /etc/my.cnf
+root@mysql-s-1vcpu-1gb-nyc1-01:~# /etc/init.d/mysql restart
+[ ok ] Restarting mysql (via systemctl): mysql.service.
+root@mysql-s-1vcpu-1gb-nyc1-01:~# mysql -u root -p mysql
+Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+root@mysql-s-1vcpu-1gb-nyc1-01:~# mysql -u root -p mysql
+Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+root@mysql-s-1vcpu-1gb-nyc1-01:~# mysql -u root -p mysql
+Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+root@mysql-s-1vcpu-1gb-nyc1-01:~# 250092acaa04f1f52c15a56be3fbe2519233570a6e9146b3
+250092acaa04f1f52c15a56be3fbe2519233570a6e9146b3: command not found
+root@mysql-s-1vcpu-1gb-nyc1-01:~# mysql -u root -p mysql                        Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+root@mysql-s-1vcpu-1gb-nyc1-01:~# ls
+root@mysql-s-1vcpu-1gb-nyc1-01:~# ls -l
+total 0
+root@mysql-s-1vcpu-1gb-nyc1-01:~# cd..
+cd..: command not found
+root@mysql-s-1vcpu-1gb-nyc1-01:~# ls
+root@mysql-s-1vcpu-1gb-nyc1-01:~# cd ..
+root@mysql-s-1vcpu-1gb-nyc1-01:/# ls
+1     dev   initrd.img      lib64       mnt   root  snap  tmp  vmlinuz
+bin   etc   initrd.img.old  lost+found  opt   run   srv   usr  vmlinuz.old
+boot  home  lib             media       proc  sbin  sys   var
+root@mysql-s-1vcpu-1gb-nyc1-01:/# cd root/
+root@mysql-s-1vcpu-1gb-nyc1-01:~# ls
+root@mysql-s-1vcpu-1gb-nyc1-01:~# ls -la /root/
+total 40
+drwx------  5 root root 4096 Jun  2 14:27 .
+drwxrwxr-x 23 root root 4096 May 30 06:38 ..
+-rw-------  1 root root   28 Jun  2 14:24 .bash_history
+-rw-r--r--  1 root root 3106 Oct 22  2015 .bashrc
+drwx------  2 root root 4096 Jun  2 14:19 .cache
+-rw-r--r--  1 root root    0 May 29 17:33 .cloud-locale-test.skip
+-rw-r--r--  1 root root  201 May 29 17:34 .digitalocean_password
+drwxr-xr-x  2 root root 4096 Jun  2 14:27 .nano
+-rw-r--r--  1 root root  148 Aug 17  2015 .profile
+drwx------  2 root root 4096 May 29 17:33 .ssh
+-rw-------  1 root root  662 Jun  2 14:24 .viminfo
+root@mysql-s-1vcpu-1gb-nyc1-01:~# cat .digitalocean_password
+SHOW PASSWORD
+
+root@mysql-s-1vcpu-1gb-nyc1-01:~# mysql -u root -p mysql                        Enter password:
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+mysql> CREATE DATABASE foo;
+Query OK, 1 row affected (0.00 sec)
+mysql> GRANT ALL ON foo.* TO root1@'%' IDENTIFIED BY 'root1';
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> exit
+
+
