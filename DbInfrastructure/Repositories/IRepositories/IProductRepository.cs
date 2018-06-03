@@ -1,10 +1,10 @@
-﻿using EFGenericRepository.Console.Entities;
+﻿using DbInfrastructure.Entities;
 using EFGenericRepository;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EFGenericRepository.Console.Repositories.IRepositories
+namespace DbInfrastructure.Repositories.IRepositories
 {
     public interface IProductRepository : IBaseRepository<Product>, IDisposable
     {

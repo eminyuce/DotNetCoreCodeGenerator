@@ -1,10 +1,11 @@
-﻿using EFGenericRepository.Console.Repositories.IRepositories;
+﻿using EFGenericRepository;
+using DbInfrastructure.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace EFGenericRepository.Console.Services.IServices
+namespace DbInfrastructure.Services.IServices
 {
     public abstract class BaseService<T> : IBaseService<T> where T : class, IEntity<int>
     {
@@ -43,7 +44,23 @@ namespace EFGenericRepository.Console.Services.IServices
             var result = this.baseRepository.DeleteItem(entity);
             return result == 1;
         }
-      
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    baseRepository.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+        public virtual void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
     }
 }

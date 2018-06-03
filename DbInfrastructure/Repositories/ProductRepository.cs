@@ -1,12 +1,12 @@
-﻿using EFGenericRepository.Console.EFContext;
-using EFGenericRepository.Console.Repositories.IRepositories;
+﻿using DbInfrastructure.EFContext;
+using DbInfrastructure.Repositories.IRepositories;
 using EFGenericRepository;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using EFGenericRepository.Console.Entities;
+using DbInfrastructure.Entities;
 
-namespace EFGenericRepository.Console.Repositories
+namespace DbInfrastructure.Repositories
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {

@@ -1,12 +1,12 @@
-﻿using EFGenericRepository.Console.Entities;
-using EFGenericRepository.Console.Repositories;
+﻿using DbInfrastructure.Entities;
+using DbInfrastructure.Repositories;
 using EFGenericRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EFGenericRepository.Console.EFContext
+namespace DbInfrastructure.EFContext
 {
     public class TestEYContext : EntitiesContext, ITestEYContext
     {

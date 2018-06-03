@@ -1,13 +1,13 @@
-﻿using EFGenericRepository.Console.EFContext;
-using EFGenericRepository.Console.Entities;
-using EFGenericRepository.Console.Repositories;
-using EFGenericRepository.Console.Repositories.IRepositories;
-using EFGenericRepository.Console.Services;
+﻿using DbInfrastructure.EFContext;
+using DbInfrastructure.Entities;
+using DbInfrastructure.Repositories;
+using DbInfrastructure.Repositories.IRepositories;
+using DbInfrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 
-namespace EFGenericRepository.Console
+namespace Infrastructure
 {
     class Program
     {
@@ -18,7 +18,7 @@ namespace EFGenericRepository.Console
 
         static void Main(string[] args)
         {
-            // Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello World!");
             var builder = new ConfigurationBuilder()
       .SetBasePath(Directory.GetCurrentDirectory())
       .AddJsonFile("appsettings.json");
@@ -27,8 +27,8 @@ namespace EFGenericRepository.Console
 
             string MySqlDefaultConnection = configuration.GetConnectionString("MySqlDefaultConnection");
             string connectionString = configuration.GetConnectionString("DefaultConnection");
-           System.Console.WriteLine(connectionString);
-           System.Console.WriteLine(MySqlDefaultConnection);
+            System.Console.WriteLine(connectionString);
+            System.Console.WriteLine(MySqlDefaultConnection);
             ITestEYContext db = new TestEYContext(MySqlDefaultConnection);
             IProductRepository productRepository = new ProductRepository(db);
             var productService = new ProductService(productRepository);
@@ -55,13 +55,13 @@ namespace EFGenericRepository.Console
             var products = productService.GetAll();
             foreach (var p in products)
             {
-               System.Console.WriteLine(p.Name);
+                System.Console.WriteLine(p.Name);
             }
 
 
             System.Console.WriteLine("Press any key to continue...");
             System.Console.ReadLine();
-         
+
         }
     }
 }

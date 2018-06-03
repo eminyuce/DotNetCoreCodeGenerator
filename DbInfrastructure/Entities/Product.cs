@@ -1,11 +1,11 @@
-﻿using EFGenericRepository.Console;
+﻿using DbInfrastructure;
 using EFGenericRepository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace EFGenericRepository.Console.Entities
+namespace DbInfrastructure.Entities
 {
     public class Product : IEntity<int>
     {

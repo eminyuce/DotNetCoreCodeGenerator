@@ -1,14 +1,14 @@
-﻿using EFGenericRepository.Console.Repositories.IRepositories;
-using EFGenericRepository.Console.Services.IServices;
+﻿using DbInfrastructure.Repositories.IRepositories;
+using DbInfrastructure.Services.IServices;
 using EFGenericRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using EFGenericRepository.Console.Entities;
+using DbInfrastructure.Entities;
 
-namespace EFGenericRepository.Console.Services
+namespace DbInfrastructure.Services
 {
     public class ProductService : BaseService<Product>, IProductService
     {
@@ -18,9 +18,6 @@ namespace EFGenericRepository.Console.Services
             ProductRepository = baseRepository;
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using EFGenericRepository;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace EFGenericRepository.Console.Repositories.IRepositories
+namespace DbInfrastructure.Repositories.IRepositories
 {
-    public interface IBaseRepository<T> : IEntityRepository<T, int> where T : class, IEntity<int>
+    public interface IBaseRepository<T> : IDisposable , IEntityRepository<T, int> where T : class, IEntity<int>
     {
         int SaveOrEdit(T item);
         int DeleteItem(T item);

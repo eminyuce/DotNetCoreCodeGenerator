@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DbInfrastructure\DbInfrastructure.csproj" />
     <ProjectReference Include="..\DotNetCoreCodeGenerator.Domain\DotNetCoreCodeGenerator.Domain.csproj" />
   </ItemGroup>
 
