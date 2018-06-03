@@ -38,7 +38,6 @@ namespace DotNetCodeGenerator.Domain.Repositories
             var selectedTableWithDatabase = selectedTable.Split("-".ToCharArray()).FirstOrDefault().ToStr();
             var con = new MySqlConnection(databaseMetaData.MySqlConnectionString);
             con.Open();
-
             string[] objArrRestrict;
             var tParts = selectedTableWithDatabase.Split(".".ToCharArray());
             objArrRestrict = new string[] {null,
@@ -121,7 +120,7 @@ namespace DotNetCodeGenerator.Domain.Repositories
         public DatabaseMetadata GetAllMySqlTables(String connectionString)
         {
             var result = new DatabaseMetadata();
-            MySqlConnection con = new MySqlConnection(connectionString);
+            var con = new MySqlConnection(connectionString);
             result.DatabaseType = DatabaseType.MySql;
 
             try

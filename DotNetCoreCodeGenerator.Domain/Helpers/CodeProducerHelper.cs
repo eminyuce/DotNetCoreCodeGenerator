@@ -775,8 +775,8 @@ namespace DotNetCodeGenerator.Domain.Helpers
                         }
                         else if (item.DataType.IndexOf("float") > -1)
                         {
-                            method.AppendLine("public float " + item.ColumnName + " { get; set; }");
-                            method2.AppendLine("public float " + item.ColumnName + " { get; set; }");
+                            method.AppendLine("public double " + item.ColumnName + " { get; set; }");
+                            method2.AppendLine("public double " + item.ColumnName + " { get; set; }");
                         }
                         else if (item.DataType.IndexOf("char") > -1)
                         {
@@ -820,7 +820,7 @@ namespace DotNetCodeGenerator.Domain.Helpers
                         }
                         else if (item.DataType.IndexOf("float") > -1)
                         {
-                            method555.Append("float " + fColumnName + ",");
+                            method555.Append("double " + fColumnName + ",");
                         }
                         else if (item.DataType.IndexOf("char") > -1)
                         {
@@ -1236,7 +1236,7 @@ namespace DotNetCodeGenerator.Domain.Helpers
                     else if (item.DataType.IndexOf("float") > -1)
                     {
                         method.AppendLine("parameterList.Add(DatabaseUtility.GetSqlParameter(\"" + sqlParameter + "\", item." +
-                                          item.ColumnName + ",SqlDbType.Float));");
+                                          item.ColumnName + ",SqlDbType.Double));");
                     }
                     else
                     {
