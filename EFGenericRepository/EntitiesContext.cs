@@ -23,14 +23,7 @@ namespace EFGenericRepository
         public EntitiesContext(DbContextOptions options) : base(options)
         {
         }
-        private readonly string _connectionString;
-        public EntitiesContext(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-      => optionsBuilder.UseSqlServer(_connectionString);
+     
 
 
         /// <summary>
