@@ -48,6 +48,10 @@ namespace DotNetCoreCodeGenerator
             var appPublishedFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
             var builder = WebHost.CreateDefaultBuilder(args);
+           // builder.UseKestrel();
+           // builder.UseContentRoot(Directory.GetCurrentDirectory());
+           // builder.UseUrls("http://localhost:3083");
+           // builder.UseIISIntegration();
 
             //appPublishedFolder = appPublishedFolder + "/publish";
          //    builder.UseContentRoot(appPublishedFolder);
