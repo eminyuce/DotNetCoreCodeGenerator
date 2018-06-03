@@ -17,21 +17,27 @@ namespace DotNetCoreCodeGenerator.Controllers
             return View(items);
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id=0)
         {
-            var model = ProductService.GetSingle(id);
-
-            if (model == null)
+            Product model = new Product();
+            if (id > 0)
             {
-                return RedirectToAction("Index");
+                model = ProductService.GetSingle(id);
+
+                if (model == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
+           
             return View(model);
         }
         [HttpPost]
         public IActionResult Edit(Product product)
         {
-           ProductService.SaveOrEditEntity(product);
-           return RedirectToAction("Index");
+            ProductService.SaveOrEditEntity(product);
+            return RedirectToAction("Index");
         }
     }
 }
