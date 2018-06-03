@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DotNetCoreCodeGenerator.Domain\DotNetCoreCodeGenerator.Domain.csproj" />
+    <ProjectReference Include="..\EFGenericRepository\EFGenericRepository.csproj" />
   </ItemGroup>
 
  

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Threading.Tasks;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository
+namespace EFGenericRepository
 {
     public interface IEntitiesContext : IDisposable
     {

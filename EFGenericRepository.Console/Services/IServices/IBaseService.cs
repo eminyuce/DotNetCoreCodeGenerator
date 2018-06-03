@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository.Services.IServices
+namespace EFGenericRepository.Console.Services.IServices
 {
     public interface IBaseService<T> where T : class
     {

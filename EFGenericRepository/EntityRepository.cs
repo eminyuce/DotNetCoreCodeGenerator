@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository
+namespace EFGenericRepository
 {
     /// <summary>
     /// IEntityRepository implementation for DbContext instance.

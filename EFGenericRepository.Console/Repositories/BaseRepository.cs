@@ -1,6 +1,5 @@
-﻿using DotNetCodeGenerator.Domain.Helpers;
-using DotNetCoreCodeGenerator.Domain.EFRepository.EFContext;
-using DotNetCoreCodeGenerator.Domain.EFRepository.Repositories.IRepositories;
+﻿using EFGenericRepository.Console.EFContext;
+using EFGenericRepository.Console.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository.Repositories
+namespace EFGenericRepository.Console.Repositories
 {
     public abstract class BaseRepository<T> : EntityRepository<T, int>, IBaseRepository<T> 
       where T : class, IEntity<int>
@@ -52,7 +51,7 @@ namespace DotNetCoreCodeGenerator.Domain.EFRepository.Repositories
 
         public int SaveOrEdit(T item)
         {
-            if (item.Id.ToInt() == 0)
+            if ((int)item.Id == 0)
             {
                 this.Add(item);
             }

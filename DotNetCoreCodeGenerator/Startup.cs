@@ -22,7 +22,6 @@ using System.IO;
 using DotNetCoreCodeGenerator.Domain;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-using DotNetCoreCodeGenerator.Domain.EFRepository.EFContext;
 
 namespace DotNetCoreCodeGenerator
 {
@@ -42,8 +41,6 @@ namespace DotNetCoreCodeGenerator
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(MyAppSetttings.ConnectionStringKey)));
 
-            services.AddDbContext<TestEYContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString(MyAppSetttings.ConnectionStringKey)));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

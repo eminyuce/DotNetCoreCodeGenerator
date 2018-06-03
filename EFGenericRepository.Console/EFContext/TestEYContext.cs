@@ -1,11 +1,12 @@
-﻿using DotNetCoreCodeGenerator.Domain.EFRepository.Repositories;
-using DotNetCoreCodeGenerator.Domain.Entities;
+﻿using EFGenericRepository.Console.Entities;
+using EFGenericRepository.Console.Repositories;
+using EFGenericRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository.EFContext
+namespace EFGenericRepository.Console.EFContext
 {
     public class TestEYContext : EntitiesContext, ITestEYContext
     {

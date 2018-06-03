@@ -10,10 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetCodeGenerator.Domain.Helpers;
 using System.Diagnostics;
 using DotNetCodeGenerator.Domain.Entities;
-using DotNetCoreCodeGenerator.Domain.EFRepository.Repositories;
-using DotNetCoreCodeGenerator.Domain.EFRepository.EFContext;
-using DotNetCoreCodeGenerator.Domain.EFRepository.Services;
-using DotNetCoreCodeGenerator.Domain.EFRepository.Repositories.IRepositories;
 using DotNetCoreCodeGenerator.Domain;
 
 namespace DotNetCoreCodeGenerator.UnitTest
@@ -30,20 +26,7 @@ namespace DotNetCoreCodeGenerator.UnitTest
                         .AddJsonFile("appsettings.Development.json")
                         .Build();
         }
-        [TestMethod]
-        public void TesEFRepository()
-        {
-            string MySqlDefaultConnection = GetConfig().GetConnectionString("MySqlDefaultConnection");
-            string connectionString = GetConfig().GetConnectionString("DefaultConnection");
-            TestEYContext db = new TestEYContext(connectionString);
-            IProductRepository productRepository = new ProductRepository(db);
-            var productService = new ProductService(productRepository);
-            var products = productService.GetAll();
-            foreach (var p in products)
-            {
-                Console.WriteLine(p.Name);
-            }
-        }
+        
         //[TestMethod]
         //public void TestMethod21()
         //{

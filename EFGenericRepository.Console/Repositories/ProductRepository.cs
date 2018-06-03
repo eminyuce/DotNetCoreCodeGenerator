@@ -1,11 +1,12 @@
-﻿using DotNetCoreCodeGenerator.Domain.EFRepository.EFContext;
-using DotNetCoreCodeGenerator.Domain.EFRepository.Repositories.IRepositories;
-using DotNetCoreCodeGenerator.Domain.Entities;
+﻿using EFGenericRepository.Console.EFContext;
+using EFGenericRepository.Console.Repositories.IRepositories;
+using EFGenericRepository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EFGenericRepository.Console.Entities;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository.Repositories
+namespace EFGenericRepository.Console.Repositories
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {

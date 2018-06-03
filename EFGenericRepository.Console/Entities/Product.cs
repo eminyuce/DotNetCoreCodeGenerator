@@ -1,10 +1,11 @@
-﻿using DotNetCoreCodeGenerator.Domain.EFRepository;
+﻿using EFGenericRepository.Console;
+using EFGenericRepository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace DotNetCoreCodeGenerator.Domain.Entities
+namespace EFGenericRepository.Console.Entities
 {
     public class Product : IEntity<int>
     {

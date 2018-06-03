@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository
+namespace EFGenericRepository
 {
     /// <summary>
     /// List object to represent the paginated collection.

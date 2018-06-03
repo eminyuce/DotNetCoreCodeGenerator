@@ -1,10 +1,10 @@
-﻿using DotNetCoreCodeGenerator.Domain.EFRepository.Repositories.IRepositories;
+﻿using EFGenericRepository.Console.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository.Services.IServices
+namespace EFGenericRepository.Console.Services.IServices
 {
     public abstract class BaseService<T> : IBaseService<T> where T : class, IEntity<int>
     {

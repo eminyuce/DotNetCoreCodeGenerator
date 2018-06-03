@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace DotNetCoreCodeGenerator.Domain.EFRepository
+namespace EFGenericRepository
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class QueryableExtensions
