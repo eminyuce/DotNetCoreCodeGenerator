@@ -34,12 +34,6 @@ namespace DotNetCoreCodeGenerator.Controllers
            
             return View(model);
         }
-        //[HttpPost]
-        //public IActionResult Edit(Product product)
-        //{
-        //    Task.WaitAny(ProductService.SaveOrUpdateAsync(product, product.Id));
-        //    return RedirectToAction("Index");
-        //}
 
         [HttpPost]
         public async Task<IActionResult> Edit(Product product)
@@ -48,11 +42,6 @@ namespace DotNetCoreCodeGenerator.Controllers
           
             return RedirectToAction("Index");
         }
-        //[HttpPost]
-        //public IActionResult Edit(Product product)
-        //{
-        //     ProductService.SaveOrUpdate(product, product.Id);
-        //    return RedirectToAction("Index");
-        //}
+         
     }
 }
