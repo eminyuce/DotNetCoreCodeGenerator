@@ -14,7 +14,7 @@ namespace DbInfrastructure.Repositories
       where T : class, IEntity<int>
     {
 
-        protected ITestEYContext DbContext;
+        public ITestEYContext DbContext;
 
         public BaseRepository(ITestEYContext dbContext) : base(dbContext)
         {

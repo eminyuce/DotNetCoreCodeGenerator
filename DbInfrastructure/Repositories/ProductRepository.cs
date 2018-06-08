@@ -12,6 +12,7 @@ namespace DbInfrastructure.Repositories
     {
         public ProductRepository(ITestEYContext dbContext) : base(dbContext)
         {
+         
         }
     }
 }

@@ -27,6 +27,7 @@ using DbInfrastructure.Repositories;
 using DbInfrastructure.Repositories.IRepositories;
 using DbInfrastructure.Services.IServices;
 using DbInfrastructure.Services;
+using System.Reflection;
 
 namespace DotNetCoreCodeGenerator
 {
@@ -46,7 +47,7 @@ namespace DotNetCoreCodeGenerator
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(MyAppSetttings.ConnectionStringKey)));
 
-           ;
+            ;
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -56,8 +57,9 @@ namespace DotNetCoreCodeGenerator
             // Add application services.
             services.AddSingleton<MyAppSetttings>();
             services.AddTransient<ITestEYContext>(s => new TestEYContext(Configuration.GetConnectionString("MySqlDefaultConnection")));
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IProductService, ProductService>();
+
+            AddTransientByReflection(services, typeof(IBaseService<>), "Service");
+            AddTransientByReflection(services, typeof(IBaseRepository<>), "Repository");
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ITableRepository, TableRepository>();
@@ -75,12 +77,31 @@ namespace DotNetCoreCodeGenerator
 
         }
 
+        private static void AddTransientByReflection(IServiceCollection services, Type typeOfInterface, string typeofText)
+        {
+            var baseServiceTypes = Assembly.GetAssembly(typeOfInterface)
+               .GetTypes().Where(t => t.Name.EndsWith(typeofText)).ToList();
+
+            foreach (var type in baseServiceTypes)
+            {
+                string baseClass = "I" + type.Name;
+                if (!baseClass.StartsWith("IBase"))
+                {
+                    var interfaceType = type.GetInterface(baseClass);
+                    if (interfaceType != null)
+                    {
+                        services.AddTransient(interfaceType, type);
+                    }
+                }
+            }
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddNLog();
-           // Console.WriteLine("ContentRootPath:  " + env.ContentRootPath.Replace("DotNetCoreCodeGenerator","") + "nlog.config");
-           // Console.WriteLine("WebRootPath:  " + env.WebRootPath + "nlog.config");
+            // Console.WriteLine("ContentRootPath:  " + env.ContentRootPath.Replace("DotNetCoreCodeGenerator","") + "nlog.config");
+            // Console.WriteLine("WebRootPath:  " + env.WebRootPath + "nlog.config");
 
 
             if (env.IsDevelopment())
@@ -94,7 +115,7 @@ namespace DotNetCoreCodeGenerator
             }
             else
             {
-                var appPublishedFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+                var appPublishedFolder = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
                 env.ConfigureNLog(appPublishedFolder + "/nlog.config");
                 app.UseExceptionHandler("/Home/Error");
             }

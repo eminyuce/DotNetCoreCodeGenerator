@@ -16,6 +16,7 @@ namespace DbInfrastructure.Services
         public ProductService(IProductRepository baseRepository) : base(baseRepository)
         {
             ProductRepository = baseRepository;
+          
         }
 
        
