@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DbInfrastructure.Repositories.IRepositories
 {
-    public interface IBaseRepository<T> : IDisposable , IEntityRepository<T, int> where T : class, IEntity<int>
+    public interface IBaseRepository<T> : IEntityRepository<T, int> where T : class, IEntity<int>
     {
         int SaveOrEdit(T item);
         int DeleteItem(T item);

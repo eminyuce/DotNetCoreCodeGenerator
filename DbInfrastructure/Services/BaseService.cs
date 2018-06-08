@@ -44,23 +44,7 @@ namespace DbInfrastructure.Services.IServices
             var result = this.baseRepository.DeleteItem(entity);
             return result == 1;
         }
-        private bool disposed = false;
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    baseRepository.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-        public virtual void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        
 
     }
 }

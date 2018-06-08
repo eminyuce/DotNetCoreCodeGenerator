@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EFGenericRepository
 {
@@ -257,6 +258,100 @@ namespace EFGenericRepository
                 searchExpression, new ParameterExpression[] { property.Parameters.Single() });
 
             return dbSet.Where(lambda);
+        }
+
+      
+        public virtual async Task<ICollection<TEntity>> GetAllAsyn()
+        {
+
+            return await _dbContext.Set<TEntity>().ToListAsync();
+        }
+
+       
+        public virtual async Task<TEntity> GetAsync(int id)
+        {
+            return await _dbContext.Set<TEntity>().FindAsync(id);
+        }
+
+      
+        public virtual async Task<TEntity> AddAsyn(TEntity t)
+        {
+            _dbContext.Set<TEntity>().Add(t);
+            await _dbContext.SaveChangesAsync();
+            return t;
+
+        }
+ 
+
+        public virtual async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match)
+        {
+            return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(match);
+        }
+
+   
+
+        public async Task<ICollection<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> match)
+        {
+            return await _dbContext.Set<TEntity>().Where(match).ToListAsync();
+        }
+
+     
+
+        public virtual async Task<int> DeleteAsyn(TEntity entity)
+        {
+            _dbContext.Set<TEntity>().Remove(entity);
+            return await _dbContext.SaveChangesAsync();
+        }
+ 
+
+        public virtual async Task<TEntity> UpdateAsyn(TEntity t, object key)
+        {
+            if (t == null)
+                return null;
+            TEntity exist = await _dbContext.Set<TEntity>().FindAsync(key);
+            if (exist != null)
+            {
+                _dbContext.Entry(exist).CurrentValues.SetValues(t);
+                await _dbContext.SaveChangesAsync();
+            }
+            return exist;
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _dbContext.Set<TEntity>().CountAsync();
+        }
+
+        public async virtual Task<int> SaveAsync()
+        {
+            return await _dbContext.SaveChangesAsync();
+        }
+
+       
+        public virtual async Task<ICollection<TEntity>> FindByAsyn(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
+        }
+
+       
+
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _dbContext.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 

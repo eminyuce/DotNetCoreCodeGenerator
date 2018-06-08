@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EFGenericRepository
 {
@@ -11,7 +12,7 @@ namespace EFGenericRepository
     /// </summary>
     /// <typeparam name="TEntity">Type of entity</typeparam>
     /// <typeparam name="TId">Type of entity Id</typeparam>
-    public interface IEntityRepository<TEntity, TId> : IRepository<TEntity, TId>
+    public interface IEntityRepository<TEntity, TId> : IDisposable, IRepository<TEntity, TId>
         where TEntity : class, IEntity<TId>
         where TId : IComparable
     {
@@ -44,7 +45,16 @@ namespace EFGenericRepository
         bool Contains(Expression<Func<TEntity, bool>> predicate);
         void Delete(Expression<Func<TEntity, bool>> predicate);
 
-     
+        Task<TEntity> AddAsyn(TEntity TEntity);
+        Task<int> CountAsync();
+        Task<int> DeleteAsyn(TEntity entity);
+        Task<ICollection<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> match);
+        Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match);
+        Task<ICollection<TEntity>> FindByAsyn(Expression<Func<TEntity, bool>> predicate);
+        Task<ICollection<TEntity>> GetAllAsyn();
+        Task<TEntity> GetAsync(int id);
+        Task<int> SaveAsync();
+        Task<TEntity> UpdateAsyn(TEntity TEntity, object key);
 
 
     }

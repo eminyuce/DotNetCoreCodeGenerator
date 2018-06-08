@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DbInfrastructure.Repositories.IRepositories
 {
-    public interface IProductRepository : IBaseRepository<Product>, IDisposable
+    public interface IProductRepository : IBaseRepository<Product>
     {
     }
 }

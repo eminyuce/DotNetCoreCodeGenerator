@@ -25,24 +25,7 @@ namespace DbInfrastructure.Repositories
 
         }
 
-        private bool disposed = false;
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    DbContext.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-  
-        public virtual void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+     
      
        
         public List<Expression<Func<T, object>>> GetIncludePropertyExpressionList()
