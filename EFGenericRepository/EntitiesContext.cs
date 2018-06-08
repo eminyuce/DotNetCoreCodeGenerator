@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EFGenericRepository
@@ -93,9 +94,11 @@ namespace EFGenericRepository
             return dbEntityEntry;
         }
 
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            bool acceptAllChangesOnSuccess = true;
+            CancellationToken cancellationToken = new CancellationToken();
+            return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
     }
 }

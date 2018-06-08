@@ -6,6 +6,7 @@ using DbInfrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Infrastructure
 {
@@ -17,6 +18,11 @@ namespace Infrastructure
         public static IConfigurationRoot Configuration { get; set; }
 
         static void Main(string[] args)
+        {
+             NewMethod(); 
+        }
+
+        private static void NewMethod()
         {
             Console.WriteLine("Hello World!");
             var builder = new ConfigurationBuilder()
@@ -34,7 +40,7 @@ namespace Infrastructure
             var productService = new ProductService(productRepository);
 
             var item = new Product();
-            item.Id = 1;
+            item.Id = 99;
             item.StoreId = 1;
             item.ProductCategoryId = 1;
             item.BrandId = 1;
@@ -50,7 +56,7 @@ namespace Infrastructure
             item.ImageState = true;
             item.UpdatedDate = DateTime.Now;
             item.Price = 1000;
-            productService.SaveOrEditEntity(item);
+             productService.SaveOrUpdate(item, item.Id);
 
             var products = productService.GetAll();
             foreach (var p in products)
@@ -61,7 +67,6 @@ namespace Infrastructure
 
             System.Console.WriteLine("Press any key to continue...");
             System.Console.ReadLine();
-
         }
     }
 }

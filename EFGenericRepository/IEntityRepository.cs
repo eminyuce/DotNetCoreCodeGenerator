@@ -34,7 +34,7 @@ namespace EFGenericRepository
 
         void Add(TEntity entity);
         void AddGraph(TEntity entity);
-        void Edit(TEntity entity);
+        void Update(TEntity entity);
         void Delete(TEntity entity);
         int Save();
         IQueryable<TEntity> FindAll<TKey>(Expression<Func<TEntity, bool>> match, Expression<Func<TEntity, TKey>> keySelector,
@@ -45,17 +45,18 @@ namespace EFGenericRepository
         bool Contains(Expression<Func<TEntity, bool>> predicate);
         void Delete(Expression<Func<TEntity, bool>> predicate);
 
-        Task<TEntity> AddAsyn(TEntity TEntity);
+        Task<TEntity> AddAsync(TEntity TEntity);
         Task<int> CountAsync();
-        Task<int> DeleteAsyn(TEntity entity);
-        Task<ICollection<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> match);
+        Task<int> DeleteAsync(TEntity entity);
+        Task<List<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> match);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match);
-        Task<ICollection<TEntity>> FindByAsyn(Expression<Func<TEntity, bool>> predicate);
-        Task<ICollection<TEntity>> GetAllAsyn();
+        Task<List<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<List<TEntity>> GetAllAsync();
         Task<TEntity> GetAsync(int id);
         Task<int> SaveAsync();
-        Task<TEntity> UpdateAsyn(TEntity TEntity, object key);
+        Task<TEntity> UpdateAsync(TEntity TEntity, object key);
 
-
+        Task<TEntity> SaveOrUpdateAsync(TEntity entity, object key);
+        TEntity SaveOrUpdate(TEntity entity, object key);
     }
 }

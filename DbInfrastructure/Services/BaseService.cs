@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace DbInfrastructure.Services.IServices
 {
@@ -32,19 +33,40 @@ namespace DbInfrastructure.Services.IServices
             return baseRepository.GetSingle(id);
         }
 
-        public virtual T SaveOrEditEntity(T entity)
+        public virtual T SaveOrUpdate(T entity, object key)
         {
-            var tmp = baseRepository.SaveOrEdit(entity);
+            var tmp = baseRepository.SaveOrUpdate(entity, key);
             return entity;
         }
 
-
-        public virtual bool DeleteEntity(T entity)
+        public virtual void DeleteEntity(T entity)
         {
-            var result = this.baseRepository.DeleteItem(entity);
-            return result == 1;
+            baseRepository.Delete(entity);
         }
-        
 
+        public virtual async Task<List<T>> LoadEntitesAsync(Expression<Func<T, bool>> whereLambda)
+        {
+            return await baseRepository.FindByAsync(whereLambda);
+        }
+
+        public virtual async Task<T> SaveOrUpdateAsync(T entity, object key)
+        {
+            return await baseRepository.SaveOrUpdateAsync(entity, key);
+        }
+
+        public virtual async Task<T> GetSingleAsync(int id)
+        {
+            return await baseRepository.GetAsync(id);
+        }
+
+        public virtual async Task<List<T>> GetAllAsync()
+        {
+            return await baseRepository.GetAllAsync();
+        }
+
+        public virtual async Task<int> DeleteEntityAsync(T entity)
+        {
+            return await baseRepository.DeleteAsync(entity);
+        }
     }
 }

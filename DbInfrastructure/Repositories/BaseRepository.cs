@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DbInfrastructure.Repositories
 {
@@ -25,40 +26,10 @@ namespace DbInfrastructure.Repositories
 
         }
 
+ 
      
-     
-       
-        public List<Expression<Func<T, object>>> GetIncludePropertyExpressionList()
-        {
-            return new List<Expression<Func<T, object>>>();
-        }
-
-        public int SaveOrEdit(T item)
-        {
-            if ((int)item.Id == 0)
-            {
-                this.Add(item);
-            }
-            else
-            {
-                this.Edit(item);
-            }
-
-            return this.Save();
-        }
-
-        public int DeleteItem(T item)
-        {
-            this.Delete(item);
-            return this.Save();
-        }
-
-        public bool DeleteByWhereCondition(Expression<Func<T, bool>> whereLambda)
-        {
-            this.Delete(whereLambda);
-            return this.Save() == 1;
-        }
 
      
+ 
     }
 }

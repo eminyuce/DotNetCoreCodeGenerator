@@ -126,7 +126,7 @@ namespace EFGenericRepository
             _dbContext.Set<TEntity>().Add(entity);
         }
 
-        public void Edit(TEntity entity)
+        public void Update(TEntity entity)
         {
 
             _dbContext.SetAsModified(entity);
@@ -134,7 +134,6 @@ namespace EFGenericRepository
 
         public void Delete(TEntity entity)
         {
-
             _dbContext.SetAsDeleted(entity);
         }
 
@@ -188,13 +187,10 @@ namespace EFGenericRepository
             return GetAll().Count();
         }
 
-
-
         public int Count(Expression<Func<TEntity, bool>> match)
         {
             return FindBy(match).Count();
         }
-
 
         public IQueryable<TEntity> FindAllIncluding<TKey>(Expression<Func<TEntity, bool>> match, Expression<Func<TEntity, TKey>> keySelector, OrderByType orderByType,
                                          int? take, int? skip, params Expression<Func<TEntity, object>>[] includeProperties)
@@ -260,51 +256,46 @@ namespace EFGenericRepository
             return dbSet.Where(lambda);
         }
 
-      
-        public virtual async Task<ICollection<TEntity>> GetAllAsyn()
+
+        public virtual async Task<List<TEntity>> GetAllAsync()
         {
 
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-       
+
         public virtual async Task<TEntity> GetAsync(int id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-      
-        public virtual async Task<TEntity> AddAsyn(TEntity t)
+
+        public virtual async Task<TEntity> AddAsync(TEntity t)
         {
             _dbContext.Set<TEntity>().Add(t);
             await _dbContext.SaveChangesAsync();
             return t;
 
         }
- 
 
         public virtual async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match)
         {
             return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(match);
         }
 
-   
-
-        public async Task<ICollection<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> match)
+        public async Task<List<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> match)
         {
             return await _dbContext.Set<TEntity>().Where(match).ToListAsync();
         }
 
-     
-
-        public virtual async Task<int> DeleteAsyn(TEntity entity)
+        public virtual async Task<int> DeleteAsync(TEntity entity)
         {
             _dbContext.Set<TEntity>().Remove(entity);
             return await _dbContext.SaveChangesAsync();
         }
- 
 
-        public virtual async Task<TEntity> UpdateAsyn(TEntity t, object key)
+
+        public virtual async Task<TEntity> UpdateAsync(TEntity t, object key)
         {
             if (t == null)
                 return null;
@@ -327,13 +318,13 @@ namespace EFGenericRepository
             return await _dbContext.SaveChangesAsync();
         }
 
-       
-        public virtual async Task<ICollection<TEntity>> FindByAsyn(Expression<Func<TEntity, bool>> predicate)
+
+        public virtual async Task<List<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
         }
 
-       
+
 
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)
@@ -353,6 +344,37 @@ namespace EFGenericRepository
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+
+        public virtual async Task<TEntity> SaveOrUpdateAsync(TEntity entity, object key)
+        {
+            int entityKey = (int)key;
+            if (entityKey == 0)
+            {
+                return await AddAsync(entity);
+            }
+            else
+            {
+                return await UpdateAsync(entity, key);
+            }
+        }
+        public TEntity SaveOrUpdate(TEntity entity, object key)
+        {
+            int entityKey = (int)key;
+            if (entityKey == 0)
+            {
+                Add(entity);
+            }
+            else
+            {
+                Update(entity);
+            }
+            this.Save();
+
+            return entity;
+        }
+
+        
     }
 
 }
