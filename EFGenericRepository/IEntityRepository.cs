@@ -12,11 +12,14 @@ namespace EFGenericRepository
     /// </summary>
     /// <typeparam name="TEntity">Type of entity</typeparam>
     /// <typeparam name="TId">Type of entity Id</typeparam>
-    public interface IEntityRepository<TEntity, TId> : IDisposable, IRepository<TEntity, TId>
+    public interface IEntityRepository<TEntity, TId> : IDisposable 
         where TEntity : class, IEntity<TId>
         where TId : IComparable
     {
-
+        IQueryable<TEntity> GetAll();
+        IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
+        PaginatedList<TEntity> Paginate(int pageIndex, int pageSize);
+        TEntity GetSingle(TId id);
         IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] includeProperties);
         TEntity GetSingleIncluding(TId id, params Expression<Func<TEntity, object>>[] includeProperties);
 
@@ -55,7 +58,6 @@ namespace EFGenericRepository
         Task<TEntity> GetAsync(int id);
         Task<int> SaveAsync();
         Task<TEntity> UpdateAsync(TEntity TEntity, object key);
-
         Task<TEntity> SaveOrUpdateAsync(TEntity entity, object key);
         TEntity SaveOrUpdate(TEntity entity, object key);
         Task<List<TEntity>> ListAsync(ISpecification<TEntity> spec);

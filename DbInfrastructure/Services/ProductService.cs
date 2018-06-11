@@ -17,6 +17,8 @@ namespace DbInfrastructure.Services
     {
         private IProductRepository ProductRepository { get; set; }
         private ILogger<ProductService> Logger { get; set; }
+
+
         public ProductService(IProductRepository baseRepository,
             ILoggerFactory loggerFactory) : base(baseRepository)
         {
