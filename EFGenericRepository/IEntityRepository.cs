@@ -34,7 +34,7 @@ namespace EFGenericRepository
 
         void Add(TEntity entity);
         void AddGraph(TEntity entity);
-        void Update(TEntity entity);
+        void Update(TEntity entity, object key);
         void Delete(TEntity entity);
         int Save();
         IQueryable<TEntity> FindAll<TKey>(Expression<Func<TEntity, bool>> match, Expression<Func<TEntity, TKey>> keySelector,

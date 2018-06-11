@@ -126,10 +126,16 @@ namespace EFGenericRepository
             _dbContext.Set<TEntity>().Add(entity);
         }
 
-        public void Update(TEntity entity)
+        public void Update(TEntity t, object key)
         {
-
-            _dbContext.SetAsModified(entity);
+           // _dbContext.SetAsModified(entity);
+            if (t == null)
+                return;
+            TEntity exist = _dbContext.Set<TEntity>().Find(key);
+            if (exist != null)
+            {
+                _dbContext.Entry(exist).CurrentValues.SetValues(t);
+            }
         }
 
         public void Delete(TEntity entity)
@@ -367,7 +373,7 @@ namespace EFGenericRepository
             }
             else
             {
-                Update(entity);
+                Update(entity, key);
             }
             this.Save();
 
