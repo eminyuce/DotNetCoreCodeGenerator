@@ -18,10 +18,10 @@ namespace DotNetCoreCodeGenerator.Controllers
         private ITableService TableService { get; set; }
         private ILogger<HomeController> Logger { get; set; }
 
-        public HomeController(ITableService _tableService, ILogger<HomeController> _logger)
+        public HomeController(ITableService _tableService, ILoggerFactory loggerFactory):base(loggerFactory)
         {
             TableService = _tableService;
-            Logger = _logger;
+            Logger = loggerFactory.CreateLogger<HomeController>();
         }
         public IActionResult WizardTest()
         {

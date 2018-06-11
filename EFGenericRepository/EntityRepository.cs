@@ -128,7 +128,6 @@ namespace EFGenericRepository
 
         public void Update(TEntity t, object key)
         {
-           // _dbContext.SetAsModified(entity);
             if (t == null)
                 return;
             TEntity exist = _dbContext.Set<TEntity>().Find(key);
@@ -145,7 +144,6 @@ namespace EFGenericRepository
 
         public int Save()
         {
-
             return _dbContext.SaveChanges();
         }
 
@@ -379,8 +377,41 @@ namespace EFGenericRepository
 
             return entity;
         }
+        public IEnumerable<TEntity> List(ISpecification<TEntity> spec)
+        {
+            // fetch a Queryable that includes all expression-based includes
+            var queryableResultWithIncludes = spec.Includes
+                .Aggregate(_dbContext.Set<TEntity>().AsQueryable(),
+                    (current, include) => current.Include(include));
 
-        
+            // modify the IQueryable to include any string-based include statements
+            var secondaryResult = spec.IncludeStrings
+                .Aggregate(queryableResultWithIncludes,
+                    (current, include) => current.Include(include));
+
+            // return the result of the query using the specification's criteria expression
+            return secondaryResult
+                            .Where(spec.Criteria)
+                            .AsEnumerable();
+        }
+        public async Task<List<TEntity>> ListAsync(ISpecification<TEntity> spec)
+        {
+            // fetch a Queryable that includes all expression-based includes
+            var queryableResultWithIncludes = spec.Includes
+                .Aggregate(_dbContext.Set<TEntity>().AsQueryable(),
+                    (current, include) => current.Include(include));
+
+            // modify the IQueryable to include any string-based include statements
+            var secondaryResult = spec.IncludeStrings
+                .Aggregate(queryableResultWithIncludes,
+                    (current, include) => current.Include(include));
+
+            // return the result of the query using the specification's criteria expression
+            return await secondaryResult
+                            .Where(spec.Criteria)
+                            .ToListAsync();
+        }
+
     }
 
 }

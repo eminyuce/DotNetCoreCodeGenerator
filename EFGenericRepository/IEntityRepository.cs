@@ -58,5 +58,7 @@ namespace EFGenericRepository
 
         Task<TEntity> SaveOrUpdateAsync(TEntity entity, object key);
         TEntity SaveOrUpdate(TEntity entity, object key);
+        Task<List<TEntity>> ListAsync(ISpecification<TEntity> spec);
+        IEnumerable<TEntity> List(ISpecification<TEntity> spec);
     }
 }

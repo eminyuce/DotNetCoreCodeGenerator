@@ -13,12 +13,12 @@ namespace DotNetCoreCodeGenerator.Controllers
 {
     public class AjaxController : BaseController
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<AjaxController> _logger;
         private ITableService TableService { get; set; }
 
-        public AjaxController(ITableService _tableService, ILogger<AjaxController> logger)
+        public AjaxController(ITableService _tableService, ILoggerFactory loggerFactory) : base(loggerFactory)
         {
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger<AjaxController>();
             TableService = _tableService;
         }
         // public async Task<IActionResult> GetTables(String connectionString = "", string mySqlConnectionString = "")

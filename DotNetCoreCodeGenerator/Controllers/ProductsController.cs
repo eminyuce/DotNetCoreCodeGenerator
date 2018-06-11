@@ -1,16 +1,24 @@
 ﻿using DbInfrastructure.Entities;
 using DbInfrastructure.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {
-    public class ProductsController : Controller
+
+    //[Route("[controller]/[action]")]
+    public class ProductsController : BaseController
     {
         public IProductService ProductService { get; set; }
-        public ProductsController(IProductService ProductService)
+        private ILogger<ProductsController> Logger { get; set; }
+
+        public ProductsController(IProductService ProductService,     
+            ILoggerFactory loggerFactory):base(loggerFactory)
         {
             this.ProductService = ProductService;
+            this.Logger = loggerFactory.CreateLogger<ProductsController>();
+     
         }
         public async Task<IActionResult> Index()
         {
@@ -27,7 +35,7 @@ namespace DotNetCoreCodeGenerator.Controllers
 
                 if (model == null)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
 
             }
@@ -39,8 +47,8 @@ namespace DotNetCoreCodeGenerator.Controllers
         public async Task<IActionResult> Edit(Product product)
         {
             var t = await ProductService.SaveOrUpdateAsync(product, product.Id);
-          
-            return RedirectToAction("Index");
+
+            return RedirectToAction(nameof(Index));
         }
          
     }
