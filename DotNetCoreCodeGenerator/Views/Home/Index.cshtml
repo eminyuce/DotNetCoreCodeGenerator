@@ -162,6 +162,7 @@ new ViewDataDictionary(this.ViewData) {
 
             </div>
             <div class="form-group">
+     
                 @await Html.PartialAsync("_ResultCodePartial",
 new ViewDataDictionary(this.ViewData) {
 { "Name", "MySqlDatabaseOperation" },
@@ -169,6 +170,7 @@ new ViewDataDictionary(this.ViewData) {
 { "ResultLanguage", "csharp" } })
             </div>
             <div class="form-group">
+                <a target="_blank" href="https://www.cleancss.com/sql-beautify/" class="btn btn-info">Go To MySql Formatter (Copy And Paste Mysql Code)</a>
                 @await Html.PartialAsync("_ResultCodePartial",
 new ViewDataDictionary(this.ViewData) {
 { "Name", "MySqlSaveOrUpdateStoredProc" },
