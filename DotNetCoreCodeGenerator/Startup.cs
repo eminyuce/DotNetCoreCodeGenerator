@@ -53,11 +53,20 @@ namespace DotNetCoreCodeGenerator
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-
+            //https://joonasw.net/view/aspnet-core-di-deep-dive
+            //services.AddSingleton<IDataService>(new DataService());
+            //services.AddTransient<IDataService, DataService>((ctx) =>
+            //{
+            //    IOtherService svc = ctx.GetService<IOtherService>();
+            //    //IOtherService svc = ctx.GetRequiredService<IOtherService>();
+            //    return new DataService(svc);
+            //});
+            //services.Add(new ServiceDescriptor(typeof(IDataService), typeof(DataService), ServiceLifetime.Transient));
+            //
             // Add application services.
             services.AddSingleton<MyAppSetttings>();
             services.AddTransient<ITestEYContext>(s => new TestEYContext(Configuration.GetConnectionString("MySqlDefaultConnection")));
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             AddTransientByReflection(services, typeof(IBaseService<>), "Service");
             AddTransientByReflection(services, typeof(IBaseRepository<>), "Repository");
 

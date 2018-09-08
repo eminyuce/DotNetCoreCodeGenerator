@@ -10,6 +10,7 @@ using DotNetCodeGenerator.Domain.Entities.Enums;
 using DotNetCodeGenerator.Domain.Helpers;
 using DotNetCodeGenerator.Domain.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {
@@ -17,11 +18,12 @@ namespace DotNetCoreCodeGenerator.Controllers
     {
         private ITableService TableService { get; set; }
         private ILogger<HomeController> Logger { get; set; }
-
-        public HomeController(ITableService _tableService, ILoggerFactory loggerFactory):base(loggerFactory)
+        private IHttpContextAccessor _accessor;
+        public HomeController(ITableService _tableService, ILoggerFactory loggerFactory, IHttpContextAccessor accessor) :base(loggerFactory)
         {
             TableService = _tableService;
             Logger = loggerFactory.CreateLogger<HomeController>();
+            _accessor = accessor;
         }
         public IActionResult WizardTest()
         {

@@ -1,5 +1,6 @@
 ﻿@model DotNetCodeGenerator.Domain.Entities.CodeGeneratorResult
 @using DotNetCodeGenerator.Domain.Helpers;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,7 +8,7 @@
 
 <h2>Code Generator Result</h2>
 <hr />
-
+<b>Client IP: @HttpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()</b>
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Index">
@@ -196,4 +197,3 @@ new ViewDataDictionary(this.ViewData) {
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
- 
