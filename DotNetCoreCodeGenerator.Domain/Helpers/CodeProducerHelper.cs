@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DotNetCodeGenerator.Domain.Services;
 using Microsoft.Extensions.Logging;
+using HelpersProject;
 
 namespace DotNetCodeGenerator.Domain.Helpers
 {

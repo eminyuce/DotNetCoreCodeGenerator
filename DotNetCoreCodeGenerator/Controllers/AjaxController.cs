@@ -8,6 +8,7 @@ using DotNetCoreCodeGenerator.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using HelpersProject;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {

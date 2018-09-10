@@ -10,11 +10,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace DotNetCodeGenerator.Domain.Helpers
+namespace HelpersProject
 {
     public static class CustomConvert
     {
-
         public static List<String> SplitString(this string text, string regExp = @"\s+")
         {
             return Regex.Split(text, regExp).Select(r => r.Trim()).Where(t => !String.IsNullOrEmpty(t)).ToList();

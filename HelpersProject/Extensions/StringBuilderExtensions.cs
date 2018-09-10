@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DotNetCodeGenerator.Domain.Helpers.Extensions
+namespace HelpersProject.Extensions
 {
     static class StringBuilderExtensions
     {

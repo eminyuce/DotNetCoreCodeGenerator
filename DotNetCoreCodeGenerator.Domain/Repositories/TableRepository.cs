@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using DotNetCodeGenerator.Domain.Entities.Enums;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Logging;
+using HelpersProject;
 
 namespace DotNetCodeGenerator.Domain.Repositories
 {

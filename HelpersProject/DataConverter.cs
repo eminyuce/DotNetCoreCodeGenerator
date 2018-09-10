@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 
 // https://cloud.tencent.com/developer/article/1030316
-namespace DotNetCodeGenerator.Domain.Helpers
+namespace HelpersProject
 {
 
     //Limitations

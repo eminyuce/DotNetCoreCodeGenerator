@@ -11,6 +11,7 @@ using DotNetCodeGenerator.Domain.Helpers;
 using DotNetCodeGenerator.Domain.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using HelpersProject;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {

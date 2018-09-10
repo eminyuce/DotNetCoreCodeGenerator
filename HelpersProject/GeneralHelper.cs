@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DotNetCodeGenerator.Domain.Helpers
+namespace HelpersProject
 {
     public class GeneralHelper
     {
