@@ -146,6 +146,80 @@ namespace DotNetCodeGenerator.Domain.Helpers
                 method.AppendLine(" int id = MySqlHelper.ExecuteScalar(ConnectionString, commandText, parameterList.ToArray()).ToInt();");
                 method.AppendLine(" return id;");
                 method.AppendLine(" }");
+
+
+
+                #region  Generating Table to Entity method code
+
+                try
+                {
+
+                    List<TableRowMetaData> list = DatabaseMetadata.SelectedTable.TableRowMetaDataList;
+                    // generating entities from data row classes 
+
+
+                    var method2 = new StringBuilder();
+                    method2.AppendLine("private " + staticText + " " + modelName + " Get" + modelName + "FromDataRow(DataRow dr)");
+                    method2.AppendLine("{");
+                    method2.AppendLine("var item = new " + modelName + "();");
+                    method2.AppendLine("");
+
+                    foreach (TableRowMetaData column in list)
+                    {
+                        String dataType = column.DataType;
+
+
+                        if (dataType.IndexOf("string") > -1)
+                        {
+                            // method.AppendLine("item." + item.columnName + " = (read[\"" + item.columnName + "\"] is DBNull) ? \"\" : read[\"" + item.columnName + "\"].ToString();");
+                            method2.AppendLine("item." + column.ColumnName + " = dr[\"" + column.ColumnName + "\"].ToStr();");
+                        }
+                        else if (dataType.IndexOf("int") > -1)
+                        {
+                            //method.AppendLine("item." + item.columnName + " = (read[\"" + item.columnName + "\"] is DBNull) ? -1 : System.Convert.ToInt32(read[\"" + item.columnName + "\"].ToString());");
+                            method2.AppendLine("item." + column.ColumnName + " = dr[\"" + column.ColumnName + "\"].ToInt();");
+                        }
+                        else if (dataType.IndexOf("date") > -1)
+                        {
+                            //method.AppendLine("item." + item.columnName + " = (read[\"" + item.columnName + "\"] is DBNull) ? DateTime.Now : DateTime.Parse(read[\"" + item.columnName + "\"].ToString());");
+                            method2.AppendLine("item." + column.ColumnName + " = dr[\"" + column.ColumnName + "\"].ToDateTime();");
+
+                        }
+                        else if (dataType.IndexOf("bool") > -1)
+                        {
+                            //method.AppendLine("item." + item.columnName + " = (read[\"" + item.columnName + "\"] is DBNull) ? false : Boolean.Parse(read[\"" + item.columnName + "\"].ToString());");
+                            method2.AppendLine("item." + column.ColumnName + " = dr[\"" + column.ColumnName + "\"].ToBool();");
+                        }
+                        else if (dataType.IndexOf("float") > -1)
+                        {
+                            //method.AppendLine("item." + item.columnName + " = (read[\"" + item.columnName + "\"] is DBNull) ? -1 : float.Parse(read[\"" + item.columnName + "\"].ToString());");
+                            method2.AppendLine("item." + column.ColumnName + " = dr[\"" + column.ColumnName + "\"].ToFloat();");
+                        }
+                        else
+                        {
+                            method2.AppendLine("// item." + column.ColumnName + " = dr[\"" + column.ColumnName + "\"].ToStr();");
+                        }
+
+                    }
+                    method2.AppendLine("return item;");
+                    method2.AppendLine("}");
+
+
+
+                    method.AppendLine(method2.ToString());
+
+
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    //TextBox_StoredProc_Exec_Model_DataReader.Text = ex.StackTrace;
+
+                }
+                #endregion
+
                 CodeGeneratorResult.MySqlDatabaseOperation = method.ToString();
                 _logger.LogTrace("CodeGeneratorResult.MySqlDatabaseOperation:"
                     + method.ToString());
