@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using HelpersProject;
+using DotNetCoreCodeGenerator.Domain;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {
@@ -17,7 +18,10 @@ namespace DotNetCoreCodeGenerator.Controllers
         private readonly ILogger<AjaxController> _logger;
         private ITableService TableService { get; set; }
 
-        public AjaxController(ITableService _tableService, ILoggerFactory loggerFactory) : base(loggerFactory)
+        public AjaxController(
+            ITableService _tableService, 
+            ILoggerFactory loggerFactory,
+            MyAppSetttings myAppSetttings) : base(loggerFactory, myAppSetttings)
         {
             _logger = loggerFactory.CreateLogger<AjaxController>();
             TableService = _tableService;

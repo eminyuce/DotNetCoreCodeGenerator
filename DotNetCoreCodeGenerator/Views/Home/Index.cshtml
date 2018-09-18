@@ -2,12 +2,16 @@
 @using DotNetCodeGenerator.Domain.Helpers;
 @using HelpersProject;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject DotNetCoreCodeGenerator.Domain.MyAppSetttings MyAppSetttings;
 @{
     ViewData["Title"] = "Index";
 }
 
 
 <h2>Code Generator Result</h2>
+<b>
+    @MyAppSetttings.GetConfigString("MyConfig2");
+</b>
 <hr />
 <b>Client IP: @HttpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString()</b>
 <div class="row">

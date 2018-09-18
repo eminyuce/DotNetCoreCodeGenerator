@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using HelpersProject;
+using DotNetCoreCodeGenerator.Domain;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {
@@ -14,8 +15,10 @@ namespace DotNetCoreCodeGenerator.Controllers
         public IProductService ProductService { get; set; }
         private ILogger<ProductsController> Logger { get; set; }
 
-        public ProductsController(IProductService ProductService,     
-            ILoggerFactory loggerFactory):base(loggerFactory)
+        public ProductsController(
+            IProductService ProductService,     
+            ILoggerFactory loggerFactory,
+            MyAppSetttings myAppSetttings) :base(loggerFactory, myAppSetttings)
         {
             this.ProductService = ProductService;
             this.Logger = loggerFactory.CreateLogger<ProductsController>();

@@ -5,15 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HelpersProject;
+using DotNetCoreCodeGenerator.Domain;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {
     public abstract class BaseController : Controller
     {
         protected  ILoggerFactory LoggerFactory { get; set; }
-        public BaseController(ILoggerFactory loggerFactory)
+        protected MyAppSetttings MyAppSetttings { get; set; }
+        public BaseController(ILoggerFactory loggerFactory, MyAppSetttings myAppSetttings)
         {
             LoggerFactory = loggerFactory;
+            MyAppSetttings = myAppSetttings;
         }
     }
 }

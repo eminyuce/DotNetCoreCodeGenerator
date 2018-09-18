@@ -12,6 +12,7 @@ using DotNetCodeGenerator.Domain.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using HelpersProject;
+using DotNetCoreCodeGenerator.Domain;
 
 namespace DotNetCoreCodeGenerator.Controllers
 {
@@ -20,7 +21,10 @@ namespace DotNetCoreCodeGenerator.Controllers
         private ITableService TableService { get; set; }
         private ILogger<HomeController> Logger { get; set; }
         private IHttpContextAccessor _accessor;
-        public HomeController(ITableService _tableService, ILoggerFactory loggerFactory, IHttpContextAccessor accessor) :base(loggerFactory)
+        public HomeController(
+            ITableService _tableService,
+            ILoggerFactory loggerFactory,
+            IHttpContextAccessor accessor, MyAppSetttings myAppSetttings) :base(loggerFactory, myAppSetttings)
         {
             TableService = _tableService;
             Logger = loggerFactory.CreateLogger<HomeController>();
