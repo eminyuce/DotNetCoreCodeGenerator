@@ -52,7 +52,63 @@ namespace HelpersProject
                     return "";
             }
         }
-
+        public static string GetCLRType(string dbType)
+        {
+            switch (dbType)
+            {
+                case "tinyint":
+                case "smallint":
+                case "mediumint":
+                case "int":
+                case "integer":
+                    return "int";
+                case "bigint":
+                    return "long";
+                case "double":
+                    return "double";
+                case "float":
+                    return "float";
+                case "decimal":
+                    return "decimal";
+                case "numeric":
+                case "real":
+                    return "decimal";
+                case "bit":
+                    return "bool";
+                case "date":
+                case "time":
+                case "year":
+                case "datetime":
+                case "timestamp":
+                    return "DateTime";
+                case "tinyblob":
+                case "blob":
+                case "mediumblob":
+                case "longblog":
+                case "binary":
+                case "varbinary":
+                    return "byte[]";
+                case "char":
+                case "varchar":
+                case "tinytext":
+                case "text":
+                case "mediumtext":
+                case "longtext":
+                    return "string";
+                case "point":
+                case "linestring":
+                case "polygon":
+                case "geometry":
+                case "multipoint":
+                case "multilinestring":
+                case "multipolygon":
+                case "geometrycollection":
+                case "enum":
+                case "set":
+                default:
+                    return dbType;
+            }
+        }
         public static string FormatXml(string xml)
         {
             try

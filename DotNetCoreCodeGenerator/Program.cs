@@ -35,7 +35,19 @@ namespace DotNetCoreCodeGenerator
             BuildWebHost(args).Run();
         }
 
-     
+
+
+//Step two: Granting access to the user
+//Let's say you have your WordPress server set up (running on IP address 192.168.1.100) to access a MySQL database named wordpressdb on the MySQL server with user wpadmin. On the MySQL server, you must grant access to the wordpressdb to that user from that IP address. Here's how to grant the user access(I'm assuming you already created the user wpadmin on the MySQL server and given it password %u#098Tl3).
+
+
+//Log in to the MySQL server.
+//Log in to MySQL with the command mysql -u root -p
+//Type the MySQL root user password.
+//Issue the MySQL command:
+//GRANT ALL ON wordpressdb.* TO 'wpadmin'@'192.168.1.100' IDENTIFIED BY '%u#098Tl3' WITH GRANT OPTION;
+//Flush the MySQL privileges with the command FLUSH PRIVILEGES;
+//Exit out of the MySQL prompt with the command exit;
 
         // use: dotnet publish --configuration Release --output ./approot
         // dotnet publish -c Release -o /root/Published

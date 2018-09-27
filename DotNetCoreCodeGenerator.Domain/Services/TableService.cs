@@ -34,8 +34,7 @@ namespace DotNetCodeGenerator.Domain.Services
             ICodeProducerHelper _codeProducerHelper,
             ISqlParserHelper _sqlParserHelper,
             ILogger<TableService> logger,
-            MyAppSetttings appSetttings
-            )
+            MyAppSetttings appSetttings)
         {
             this._tableRepository = _tableRepository;
             this._codeProducerHelper = _codeProducerHelper;

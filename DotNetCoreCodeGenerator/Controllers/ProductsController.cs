@@ -12,6 +12,7 @@ namespace DotNetCoreCodeGenerator.Controllers
     //[Route("[controller]/[action]")]
     public class ProductsController : BaseController
     {
+        // https://blog.todotnet.com/2017/07/publishing-and-running-your-asp-net-core-project-on-linux/
         public IProductService ProductService { get; set; }
         private ILogger<ProductsController> Logger { get; set; }
 
