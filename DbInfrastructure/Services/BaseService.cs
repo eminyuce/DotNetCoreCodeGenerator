@@ -16,6 +16,8 @@ namespace DbInfrastructure.Services.IServices
         {
             this.baseRepository = baseRepository;
 
+
+
         }
 
         public virtual List<T> LoadEntites(Expression<Func<T, bool>> whereLambda)
