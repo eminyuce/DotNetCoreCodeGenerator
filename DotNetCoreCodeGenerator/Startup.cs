@@ -22,11 +22,6 @@ using System.IO;
 using DotNetCoreCodeGenerator.Domain;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-using DbInfrastructure.EFContext;
-using DbInfrastructure.Repositories;
-using DbInfrastructure.Repositories.IRepositories;
-using DbInfrastructure.Services.IServices;
-using DbInfrastructure.Services;
 using System.Reflection;
 
 namespace DotNetCoreCodeGenerator
@@ -65,10 +60,10 @@ namespace DotNetCoreCodeGenerator
             //
             // Add application services.
             services.AddSingleton<MyAppSetttings>();
-            services.AddTransient<ITestEYContext>(s => new TestEYContext(Configuration.GetConnectionString("MySqlDefaultConnection")));
+            //services.AddTransient<ITestEYContext>(s => new TestEYContext(Configuration.GetConnectionString("MySqlDefaultConnection")));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            AddTransientByReflection(services, typeof(IBaseService<>), "Service");
-            AddTransientByReflection(services, typeof(IBaseRepository<>), "Repository");
+            //AddTransientByReflection(services, typeof(IBaseService<>), "Service");
+            //AddTransientByReflection(services, typeof(IBaseRepository<>), "Repository");
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ITableRepository, TableRepository>();

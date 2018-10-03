@@ -9,13 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCoreCodeGenerator.Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCoreCodeGenerator.Domain", "DotNetCoreCodeGenerator.Domain\DotNetCoreCodeGenerator.Domain.csproj", "{F82107E3-AE92-45DF-BFA5-ED6678E3E65A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFGenericRepository", "EFGenericRepository\EFGenericRepository.csproj", "{E085B25E-5F44-4855-AEA5-28CFC043B7CA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFGenericRepository.Console", "EFGenericRepository.Console\EFGenericRepository.Console.csproj", "{6039BA87-1D35-403C-B6B4-CF0F812F7094}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbInfrastructure", "DbInfrastructure\DbInfrastructure.csproj", "{53148A27-29E2-420E-BF00-423050BB834D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpersProject", "HelpersProject\HelpersProject.csproj", "{2D874C3F-F6C4-48F4-BDBD-2DFFB4B1F516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpersProject", "HelpersProject\HelpersProject.csproj", "{2D874C3F-F6C4-48F4-BDBD-2DFFB4B1F516}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,18 +29,6 @@ Global
 		{F82107E3-AE92-45DF-BFA5-ED6678E3E65A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F82107E3-AE92-45DF-BFA5-ED6678E3E65A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F82107E3-AE92-45DF-BFA5-ED6678E3E65A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E085B25E-5F44-4855-AEA5-28CFC043B7CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E085B25E-5F44-4855-AEA5-28CFC043B7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E085B25E-5F44-4855-AEA5-28CFC043B7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E085B25E-5F44-4855-AEA5-28CFC043B7CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6039BA87-1D35-403C-B6B4-CF0F812F7094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6039BA87-1D35-403C-B6B4-CF0F812F7094}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6039BA87-1D35-403C-B6B4-CF0F812F7094}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6039BA87-1D35-403C-B6B4-CF0F812F7094}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53148A27-29E2-420E-BF00-423050BB834D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53148A27-29E2-420E-BF00-423050BB834D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53148A27-29E2-420E-BF00-423050BB834D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53148A27-29E2-420E-BF00-423050BB834D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2D874C3F-F6C4-48F4-BDBD-2DFFB4B1F516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D874C3F-F6C4-48F4-BDBD-2DFFB4B1F516}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D874C3F-F6C4-48F4-BDBD-2DFFB4B1F516}.Release|Any CPU.ActiveCfg = Release|Any CPU
